@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Website Examples</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--text:#1d1d1f;--muted:#6b6b70;--line:#e3e1dc;--accent:#5b3df5}
+@media (prefers-color-scheme:dark){:root{--bg:#141416;--card:#1e1e21;--text:#f2f2f3;--muted:#a1a1a8;--line:#2e2e33;--accent:#9d8bff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:56px 16px 72px}
+h1{font-size:clamp(28px,4vw,40px);margin:0 0 8px;letter-spacing:-.02em}
+.lead{color:var(--muted);margin:0 0 40px;max-width:60ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
+.body{padding:18px 20px 22px}.body h2{margin:0 0 4px;font-size:20px}.body p{margin:0;color:var(--muted);font-size:14px}
+.tag{display:inline-block;margin-top:12px;font-size:12px;font-weight:600;color:var(--accent)}
+footer{margin-top:48px;color:var(--muted);font-size:13px}
+</style></head><body><main>
+<h1>Website examples</h1>
+<p class="lead">Store pages I rebuilt from a reference design, converted to plain HTML so you can browse them. Buttons and forms don't do anything here.</p>
+<div class="grid">
+<a class="card" href="petpad/"><img src="petpad/preview.jpg" alt="Pet Pad Store page preview"><div class="body"><h2>Pet Pad Store</h2><p>Product landing page for puppy training pads, with a gallery, FAQ and newsletter section.</p><span class="tag">View page →</span></div></a>
+<a class="card" href="glow/"><img src="glow/preview.jpg" alt="Glow spa page preview"><div class="body"><h2>Glow Spa</h2><p>Skincare and spa landing page with treatments, a product grid, blog cards and an FAQ.</p><span class="tag">View page →</span></div></a>
+</div>
+<footer>Built as Shopify themes, rendered to static HTML.</footer>
+</main></body></html>

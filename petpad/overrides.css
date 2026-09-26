@@ -1,0 +1,2 @@
+/* Static-site touch-up: hide the decorative ball the Shopify render also omits. */
+.ck-hero__bg { display: none; }

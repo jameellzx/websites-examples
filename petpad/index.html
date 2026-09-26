@@ -1,0 +1,2524 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pet Pad Store — example</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Lato",system-ui,sans-serif;color:#222;background:#fff}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.ck-hero[data-ck-root] {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-top-m);
+  padding-bottom: var(--ck-pad-bottom);
+  font-family: var(--ck-font-body);
+  letter-spacing: var(--ck-ls);
+}
+.ck-hero[data-hide-mobile] { display: none; }
+.ck-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  pointer-events: none;
+}
+.ck-hero__inner {
+  position: relative;
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-hero__heading {
+  margin: 0;
+  text-align: var(--ck-align);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-h-size-m);
+  line-height: var(--ck-h-lh);
+  font-weight: var(--ck-h-weight);
+}
+.ck-hero__heading-a,
+.ck-hero__heading-b { display: block; }
+.ck-hero__heading-a { color: var(--ck-ink); }
+.ck-hero__heading-b { color: var(--ck-accent); }
+.ck-hero__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  align-items: center;
+}
+.ck-hero__art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ck-hero__decor {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: contain;
+  pointer-events: none;
+}
+.ck-hero__art-top {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.ck-hero__art-main {
+  position: relative;
+  display: block;
+  width: 78%;
+  height: auto;
+  margin-top: var(--ck-art-shift-m);
+}
+.ck-hero__card {
+  position: relative;
+  background-color: var(--ck-card-bg);
+  color: var(--ck-card-fg);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-card-pad);
+  text-align: center;
+}
+.ck-hero__card-image {
+  display: block;
+  width: var(--ck-card-img-w);
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ck-hero__eyebrow {
+  margin: 0;
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-body-size);
+  font-weight: 700;
+}
+.ck-hero__card-title {
+  margin: 0;
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-card-title-size);
+  font-weight: 700;
+}
+.ck-hero__prices {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--ck-gap);
+}
+.ck-hero__price {
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-price-size);
+  font-weight: 800;
+}
+.ck-hero__compare {
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-compare-size);
+  font-weight: 500;
+  opacity: 0.85;
+}
+.ck-hero__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ck-gap);
+  margin-top: var(--ck-gap);
+  padding: var(--ck-btn-pad-y) var(--ck-btn-pad-x);
+  border-radius: 100px;
+  background-color: var(--ck-btn-bg);
+  color: var(--ck-btn-fg);
+  text-decoration: none;
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-btn-size);
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: background-color var(--ck-speed) ease, transform var(--ck-speed) ease;
+}
+.ck-hero__button:hover {
+  background-color: var(--ck-btn-hover);
+  transform: translateY(-2px);
+}
+.ck-hero__button-icon {
+  width: var(--ck-btn-size);
+  height: var(--ck-btn-size);
+}
+.ck-hero__payments {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  margin: var(--ck-gap) auto 0;
+}
+.ck-hero[data-animate='fade'] .ck-hero__card,
+.ck-hero[data-animate='fade'] .ck-hero__art { animation: ck-hero-fade var(--ck-speed) ease both; animation-delay: var(--ck-anim-delay); }
+.ck-hero[data-animate='slide'] .ck-hero__card,
+.ck-hero[data-animate='slide'] .ck-hero__art { animation: ck-hero-slide var(--ck-speed) ease both; animation-delay: var(--ck-anim-delay); }
+@keyframes ck-hero-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ck-hero-slide { from { opacity: 0; transform: translateY(var(--ck-gap)); } to { opacity: 1; transform: none; } }
+
+@media screen and (min-width: 750px) {
+  .ck-hero__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-hero__heading { font-size: var(--ck-h-size); }
+  .ck-hero[data-hide-mobile] { display: block; }
+}
+@media screen and (min-width: 990px) {
+  .ck-hero[data-ck-root] { padding-top: var(--ck-pad-top); }
+  .ck-hero__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+  .ck-hero__art-main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--ck-art-shift);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+  }
+  .ck-hero__art { display: block; min-height: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-hero *,
+  .ck-hero *::before { animation: none !important; transition: none !important; }
+}
+
+.ck-feat[data-ck-root] {
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-body);
+}
+.ck-feat__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-feat__heading {
+  margin: 0 0 var(--ck-gap);
+  text-align: var(--ck-align);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-h-size-m);
+  font-weight: var(--ck-h-weight);
+  line-height: var(--ck-h-lh);
+}
+.ck-feat__heading-a { display: block; color: var(--ck-ink); }
+.ck-feat__heading-b { display: block; color: var(--ck-accent); }
+.ck-feat__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  align-items: center;
+}
+.ck-feat__boxes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ck-box-gap);
+  order: 2;
+}
+.ck-feat__media {
+  position: relative;
+  order: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ck-feat[data-media-position='left'] .ck-feat__media { order: 0; }
+.ck-feat__image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.ck-feat__decor {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40%;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+}
+.ck-feat__box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ck-gap);
+  background-color: var(--ck-box-bg);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-box-pad-m);
+  max-width: var(--ck-box-max);
+  transition: transform var(--ck-speed) ease;
+}
+.ck-feat__box:hover { transform: translateY(-2px); }
+.ck-feat__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: var(--ck-box-icon);
+  width: var(--ck-icon-size);
+  height: var(--ck-icon-size);
+}
+.ck-feat__icon-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.ck-feat__box-body { min-width: 0; }
+.ck-feat__box-title {
+  margin: 0;
+  color: var(--ck-box-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-box-title-size-m);
+  font-weight: var(--ck-h-weight);
+}
+.ck-feat__box-text {
+  color: var(--ck-box-fg);
+  font-size: var(--ck-box-text-size);
+  line-height: var(--ck-box-lh);
+}
+.ck-feat__box-text > * { margin: 0; }
+.ck-feat[data-animate='fade'] .ck-feat__box,
+.ck-feat[data-animate='fade'] .ck-feat__media { animation: ck-feat-fade var(--ck-speed) ease both; animation-delay: var(--ck-anim-delay); }
+.ck-feat[data-animate='slide'] .ck-feat__box,
+.ck-feat[data-animate='slide'] .ck-feat__media { animation: ck-feat-slide var(--ck-speed) ease both; animation-delay: var(--ck-anim-delay); }
+@keyframes ck-feat-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ck-feat-slide { from { opacity: 0; transform: translateY(var(--ck-gap)); } to { opacity: 1; transform: none; } }
+
+@media screen and (min-width: 750px) {
+  .ck-feat__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-feat__heading { font-size: var(--ck-h-size); }
+  .ck-feat__box-title { font-size: var(--ck-box-title-size); }
+  .ck-feat__box { padding: var(--ck-box-pad); }
+}
+@media screen and (min-width: 990px) {
+  .ck-feat[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-feat__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+  .ck-feat__boxes { order: 0; }
+  .ck-feat__media { order: 1; }
+  .ck-feat[data-media-position='left'] .ck-feat__boxes { order: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-feat * { animation: none !important; transition: none !important; }
+}
+
+.ck-pdp[data-ck-root] {
+  background-color: var(--ck-bg);
+  color: var(--ck-body);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-body);
+  font-size: var(--ck-body-size);
+  line-height: var(--ck-lh);
+}
+.ck-pdp__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-pdp__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  align-items: start;
+}
+.ck-pdp__stage {
+  position: relative;
+  border-radius: var(--ck-radius);
+  overflow: hidden;
+}
+.ck-pdp__ribbon {
+  position: absolute;
+  left: 0;
+  top: var(--ck-gap);
+  z-index: 2;
+  background-color: var(--ck-badge-bg);
+  color: var(--ck-badge-fg);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-body-size);
+  font-weight: 600;
+  padding: 0 var(--ck-option-pad);
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+.ck-pdp__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.ck-pdp__track::-webkit-scrollbar { display: none; }
+.ck-pdp__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
+.ck-pdp__slide-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.ck-pdp__thumbs {
+  display: flex;
+  gap: var(--ck-gap);
+  margin-top: var(--ck-gap);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ck-pdp__thumbs::-webkit-scrollbar { display: none; }
+.ck-pdp__thumb {
+  flex: 0 0 auto;
+  width: var(--ck-thumb-size);
+  height: var(--ck-thumb-size);
+  padding: 0;
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius);
+  background: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--ck-speed) ease, transform var(--ck-speed) ease;
+}
+.ck-pdp__thumb[aria-current='true'] { border-color: var(--ck-accent); }
+.ck-pdp__thumb-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ck-pdp__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ck-stack);
+  text-align: var(--ck-align);
+}
+.ck-pdp__title {
+  margin: 0;
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-title-size-m);
+  font-weight: var(--ck-title-weight);
+}
+.ck-pdp__urgency {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--ck-option-pad);
+  color: var(--ck-alert);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  font-weight: 800;
+}
+.ck-pdp__prices {
+  display: flex;
+  align-items: center;
+  gap: var(--ck-option-pad);
+}
+.ck-pdp__price {
+  color: var(--ck-ink);
+  font-family: var(--ck-font-price);
+  font-size: var(--ck-price-size);
+}
+.ck-pdp__compare {
+  color: var(--ck-muted);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-compare-size);
+}
+.ck-pdp__save {
+  background-color: var(--ck-alert);
+  color: var(--ck-badge-fg);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  font-weight: 700;
+  padding: 0 var(--ck-option-pad);
+  border-radius: var(--ck-save-radius) 100px 0 var(--ck-save-radius);
+}
+.ck-pdp__bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ck-option-pad);
+}
+.ck-pdp__bullet {
+  display: flex;
+  align-items: center;
+  gap: var(--ck-option-pad);
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  font-weight: 500;
+}
+.ck-pdp__bullet-icon { display: inline-flex; color: var(--ck-bullet-icon); }
+.ck-pdp__option { display: flex; flex-direction: column; gap: var(--ck-option-pad); }
+.ck-pdp__option-label {
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  font-weight: 700;
+}
+.ck-pdp__values {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ck-option-pad);
+}
+.ck-pdp__value {
+  background: none;
+  cursor: pointer;
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  font-weight: 500;
+  color: var(--ck-body);
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-option-pad);
+  transition: border-color var(--ck-speed) ease, color var(--ck-speed) ease;
+}
+.ck-pdp__value[aria-pressed='true'] { border-color: var(--ck-accent); color: var(--ck-accent); }
+.ck-pdp__values[data-style='swatch'] .ck-pdp__value {
+  padding: 0;
+  border-radius: 100px;
+  overflow: hidden;
+  width: var(--ck-swatch-size);
+  height: var(--ck-swatch-size);
+}
+.ck-pdp__value-chip {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--ck-swatch);
+}
+.ck-pdp__actions {
+  display: flex;
+  align-items: stretch;
+  gap: var(--ck-option-pad);
+}
+.ck-pdp__qty {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  background-color: var(--ck-qty-bg);
+  border-radius: 100px;
+  height: var(--ck-qty-h);
+}
+.ck-pdp__qty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--ck-ink);
+  height: 100%;
+  padding: 0 var(--ck-option-pad);
+}
+.ck-pdp__qty-input {
+  width: var(--ck-qty-h);
+  height: 100%;
+  border: 0;
+  background: none;
+  text-align: center;
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  color: var(--ck-ink);
+  -moz-appearance: textfield;
+}
+.ck-pdp__qty-input::-webkit-outer-spin-button,
+.ck-pdp__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.ck-pdp__submit {
+  flex: 1 1 auto;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--ck-btn-bg);
+  color: var(--ck-btn-fg);
+  border-radius: 100px;
+  padding: var(--ck-btn-pad);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-btn-size);
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: background-color var(--ck-speed) ease;
+}
+.ck-pdp__submit:hover:not([disabled]) { background-color: var(--ck-btn-hover); }
+.ck-pdp__submit[disabled] { opacity: 0.55; cursor: not-allowed; }
+.ck-pdp__trust {
+  display: flex;
+  align-items: center;
+  gap: var(--ck-gap);
+  flex-wrap: wrap;
+}
+.ck-pdp__trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ck-option-pad);
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-body-size);
+  font-weight: 700;
+}
+.ck-pdp__trust-image { height: auto; max-width: 100%; }
+
+@media screen and (min-width: 750px) {
+  .ck-pdp__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-pdp__title { font-size: var(--ck-title-size); }
+}
+@media screen and (min-width: 990px) {
+  .ck-pdp[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-pdp__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+  .ck-pdp__media { grid-column: span var(--ck-media-span); }
+  .ck-pdp__info { grid-column: span var(--ck-info-span); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-pdp__track { scroll-behavior: auto; }
+  .ck-pdp * { transition: none !important; }
+}
+
+.ck-note[data-ck-root] {
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-heading);
+  line-height: var(--ck-lh);
+}
+.ck-note__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-note__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  justify-items: var(--ck-justify);
+  text-align: var(--ck-align);
+}
+.ck-note__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ck-gap);
+  color: var(--ck-item-fg);
+  font-size: var(--ck-size-m);
+  font-weight: var(--ck-weight);
+  border-radius: var(--ck-radius);
+}
+.ck-note__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: var(--ck-item-icon);
+  width: var(--ck-item-icon-size);
+}
+.ck-note__icon-image { width: 100%; height: auto; }
+.ck-note__label { color: inherit; text-decoration: none; transition: opacity var(--ck-speed) ease; }
+a.ck-note__label:hover { opacity: 0.75; }
+.ck-note[data-animate='fade'] .ck-note__item { animation: ck-note-fade var(--ck-speed) ease both; }
+.ck-note[data-animate='slide'] .ck-note__item { animation: ck-note-slide var(--ck-speed) ease both; }
+@keyframes ck-note-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ck-note-slide { from { opacity: 0; transform: translateY(var(--ck-gap)); } to { opacity: 1; transform: none; } }
+
+@media screen and (min-width: 750px) {
+  .ck-note__list { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-note__item { font-size: var(--ck-size); }
+}
+@media screen and (min-width: 990px) {
+  .ck-note[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-note__list { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-note * { animation: none !important; transition: none !important; }
+}
+
+.ck-cards[data-ck-root] {
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-body);
+}
+.ck-cards__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-cards__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  align-items: stretch;
+}
+.ck-cards__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--ck-card-bg);
+  color: var(--ck-card-fg);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-card-pad);
+  margin-top: var(--ck-overlap);
+  text-align: var(--ck-align);
+  transition: transform var(--ck-speed) ease;
+}
+.ck-cards[data-hover-lift='true'] .ck-cards__card:hover { transform: translateY(-2px); }
+.ck-cards__media {
+  width: var(--ck-media-size-m);
+  height: var(--ck-media-size-m);
+  margin-top: calc(0px - var(--ck-media-size-m) / 2 - var(--ck-overlap));
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: var(--ck-ring);
+  flex: 0 0 auto;
+}
+.ck-cards__image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ck-cards__body { margin-top: var(--ck-gap); }
+.ck-cards__title {
+  margin: 0;
+  color: var(--ck-card-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-title-size-m);
+  font-weight: var(--ck-title-weight);
+}
+.ck-cards__text {
+  font-size: var(--ck-text-size);
+  line-height: var(--ck-lh);
+}
+.ck-cards__text > * { margin: 0; }
+.ck-cards[data-animate='fade'] .ck-cards__card { animation: ck-cards-fade var(--ck-speed) ease both; animation-delay: var(--ck-anim-delay); }
+.ck-cards[data-animate='slide'] .ck-cards__card { animation: ck-cards-slide var(--ck-speed) ease both; animation-delay: var(--ck-anim-delay); }
+@keyframes ck-cards-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ck-cards-slide { from { opacity: 0; transform: translateY(var(--ck-gap)); } to { opacity: 1; transform: none; } }
+
+@media screen and (min-width: 750px) {
+  .ck-cards__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-cards__title { font-size: var(--ck-title-size); }
+  .ck-cards__media {
+    width: var(--ck-media-size);
+    height: var(--ck-media-size);
+    margin-top: calc(0px - var(--ck-media-size) / 2 - var(--ck-overlap));
+  }
+}
+@media screen and (min-width: 990px) {
+  .ck-cards[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-cards__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-cards * { animation: none !important; transition: none !important; }
+}
+
+.ck-stats[data-ck-root] {
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-body);
+  line-height: var(--ck-lh);
+}
+.ck-stats__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-stats__panel {
+  display: block;
+  background-color: var(--ck-panel-bg);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-panel-pad);
+  text-align: var(--ck-align);
+}
+.ck-stats__heading {
+  margin: 0;
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-h-size-m);
+  font-weight: var(--ck-h-weight);
+}
+.ck-stats__sub {
+  margin: 0;
+  color: var(--ck-body);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-sub-size);
+}
+.ck-stats__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  margin-top: var(--ck-panel-pad);
+}
+.ck-stats__value {
+  margin: 0;
+  color: var(--ck-num-color);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-num-size-m);
+  font-weight: var(--ck-num-weight);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ck-stats__label {
+  margin: 0;
+  color: var(--ck-label-color);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-label-size);
+  font-weight: var(--ck-label-weight);
+}
+.ck-stats__item { transition: transform var(--ck-speed) ease; }
+
+@media screen and (min-width: 750px) {
+  .ck-stats__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-stats__heading { font-size: var(--ck-h-size); }
+  .ck-stats__value { font-size: var(--ck-num-size); }
+}
+@media screen and (min-width: 990px) {
+  .ck-stats[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-stats__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-stats * { transition: none !important; }
+}
+
+.ck-news[data-ck-root] {
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-body);
+  line-height: var(--ck-lh);
+}
+.ck-news__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-news__panel {
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  background-color: var(--ck-panel-bg);
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: cover;
+  border-radius: var(--ck-radius);
+  padding: var(--ck-panel-pad);
+  min-height: var(--ck-panel-min);
+  text-align: var(--ck-align);
+}
+.ck-news__heading {
+  margin: 0;
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-h-size-m);
+  font-weight: var(--ck-h-weight);
+}
+.ck-news__sub {
+  margin: 0;
+  color: var(--ck-body);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-sub-size);
+}
+.ck-news__form { margin-top: var(--ck-gap); }
+.ck-news__field-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ck-news__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ck-field-pad);
+  background-color: var(--ck-field-bg);
+  border-radius: 100px;
+  padding: var(--ck-field-pad);
+  max-width: var(--ck-form-width);
+  margin-left: auto;
+  margin-right: auto;
+  height: var(--ck-field-h);
+}
+.ck-news__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--ck-field-fg);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-field-size);
+  padding-left: var(--ck-field-pad);
+}
+.ck-news__field:focus { outline: none; }
+.ck-news__submit {
+  flex: 0 0 auto;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--ck-btn-bg);
+  color: var(--ck-btn-fg);
+  border-radius: 100px;
+  padding: var(--ck-field-pad) var(--ck-panel-pad);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-field-size);
+  font-weight: 800;
+  transition: background-color var(--ck-speed) ease;
+}
+.ck-news__submit:hover { background-color: var(--ck-btn-hover); }
+.ck-news__message {
+  margin: var(--ck-field-pad) 0 0;
+  color: var(--ck-body);
+  font-size: var(--ck-sub-size);
+}
+.ck-news[data-animate='fade'] .ck-news__panel { animation: ck-news-fade var(--ck-speed) ease both; }
+.ck-news[data-animate='slide'] .ck-news__panel { animation: ck-news-slide var(--ck-speed) ease both; }
+@keyframes ck-news-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ck-news-slide { from { opacity: 0; transform: translateY(var(--ck-gap)); } to { opacity: 1; transform: none; } }
+
+@media screen and (min-width: 750px) {
+  .ck-news__panel { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-news__heading { font-size: var(--ck-h-size); }
+}
+@media screen and (min-width: 990px) {
+  .ck-news[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-news__panel { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-news * { animation: none !important; transition: none !important; }
+}
+
+.ck-faq[data-ck-root] {
+  background-color: var(--ck-bg);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-body);
+  line-height: var(--ck-lh);
+}
+.ck-faq__inner {
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-faq__heading {
+  margin: 0 0 var(--ck-gap);
+  text-align: var(--ck-align);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-h-size-m);
+  font-weight: var(--ck-h-weight);
+}
+.ck-faq__heading-a { display: block; color: var(--ck-ink); }
+.ck-faq__heading-b { display: block; color: var(--ck-accent); }
+.ck-faq__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  align-items: center;
+}
+.ck-faq__col { min-width: 0; }
+.ck-faq__list {
+  display: block;
+  background-color: var(--ck-panel-bg);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-panel-pad);
+}
+.ck-faq__item { border-bottom: 1px solid var(--ck-border); }
+.ck-faq__item:last-child { border-bottom: 0; }
+.ck-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ck-gap);
+  cursor: pointer;
+  list-style: none;
+  padding: var(--ck-item-pad) 0;
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-q-size);
+  font-weight: var(--ck-q-weight);
+}
+.ck-faq__question::-webkit-details-marker { display: none; }
+.ck-faq__chevron {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: var(--ck-ink);
+  transition: transform var(--ck-icon-speed) ease;
+}
+.ck-faq__item[open] .ck-faq__chevron { transform: rotate(180deg); }
+.ck-faq__answer {
+  overflow: hidden;
+  color: var(--ck-body);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-a-size);
+  padding-bottom: var(--ck-item-pad);
+}
+.ck-faq__answer > * { margin: 0 0 var(--ck-item-gap); }
+.ck-faq__media { display: flex; justify-content: center; }
+.ck-faq__image { display: block; width: 100%; max-width: 100%; height: auto; }
+.ck-faq__cta {
+  display: flex;
+  align-items: center;
+  gap: var(--ck-gap);
+  margin-top: var(--ck-gap);
+  flex-wrap: wrap;
+}
+.ck-faq__cta-text {
+  margin: 0;
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-cta-size);
+  font-weight: 700;
+}
+.ck-faq__cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ck-item-gap);
+  border: 0;
+  cursor: pointer;
+  background-color: var(--ck-cta-bg);
+  color: var(--ck-cta-fg);
+  padding: var(--ck-cta-pad-y) var(--ck-cta-pad-x);
+  border-radius: 100px var(--ck-cta-radius) 0 100px;
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-cta-size);
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: background-color var(--ck-speed) ease;
+}
+.ck-faq__cta-button:hover { background-color: var(--ck-cta-hover); }
+.ck-faq__cta-icon { display: inline-flex; }
+.ck-faq__dialog {
+  border: 0;
+  border-radius: var(--ck-radius);
+  padding: 0;
+  width: min(92vw, var(--ck-dialog-width));
+  background-color: var(--ck-bg);
+  color: var(--ck-body);
+}
+.ck-faq__dialog::backdrop { background-color: var(--ck-backdrop); opacity: var(--ck-backdrop-opacity); }
+.ck-faq__dialog-inner { position: relative; padding: var(--ck-panel-pad); }
+.ck-faq__dialog-close {
+  position: absolute;
+  top: var(--ck-item-gap);
+  right: var(--ck-item-gap);
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--ck-ink);
+}
+.ck-faq__dialog-title {
+  margin: 0 0 var(--ck-gap);
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-q-size);
+  font-weight: var(--ck-h-weight);
+}
+.ck-faq__form { display: flex; flex-direction: column; gap: var(--ck-item-gap); }
+.ck-faq__label {
+  color: var(--ck-ink);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-a-size);
+  font-weight: var(--ck-q-weight);
+}
+.ck-faq__input {
+  border: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius);
+  padding: var(--ck-item-pad);
+  font-family: var(--ck-font-heading);
+  font-size: var(--ck-a-size);
+  color: var(--ck-ink);
+  background: none;
+  width: 100%;
+}
+.ck-faq__textarea { resize: vertical; }
+.ck-faq__message { margin: 0; font-size: var(--ck-a-size); }
+
+@media screen and (min-width: 750px) {
+  .ck-faq__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+  .ck-faq__heading { font-size: var(--ck-h-size); }
+}
+@media screen and (min-width: 990px) {
+  .ck-faq[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-faq__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-faq * { animation: none !important; transition: none !important; }
+}
+
+.ck-foot[data-ck-root] {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ck-bg);
+  color: var(--ck-body);
+  padding-top: var(--ck-pad-mobile);
+  padding-bottom: var(--ck-pad-mobile);
+  font-family: var(--ck-font-heading);
+  line-height: var(--ck-lh);
+}
+.ck-foot__bg {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+}
+.ck-foot__inner {
+  position: relative;
+  max-width: var(--ck-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ck-gap);
+  padding-right: var(--ck-gap);
+}
+.ck-foot__grid {
+  display: grid;
+  gap: var(--ck-gap);
+  grid-template-columns: repeat(var(--ck-cols-mobile), minmax(0, 1fr));
+  text-align: var(--ck-align);
+}
+.ck-foot__logo { display: block; width: var(--ck-logo-width); height: auto; }
+.ck-foot__address {
+  margin-top: var(--ck-item-gap);
+  color: var(--ck-body);
+  font-size: var(--ck-address-size);
+  font-weight: var(--ck-link-weight);
+}
+.ck-foot__address > * { margin: 0; }
+.ck-foot__socials {
+  list-style: none;
+  margin: var(--ck-gap) 0 0;
+  padding: 0;
+  display: flex;
+  gap: var(--ck-gap);
+}
+.ck-foot__social-link {
+  display: inline-flex;
+  color: var(--ck-body);
+  width: var(--ck-social-size);
+  transition: color var(--ck-speed) ease;
+}
+.ck-foot__social-link:hover { color: var(--ck-hover); }
+.ck-foot__col-title {
+  margin: 0;
+  color: var(--ck-ink);
+  font-size: var(--ck-title-size);
+  font-weight: var(--ck-title-weight);
+}
+.ck-foot__links {
+  list-style: none;
+  margin: var(--ck-item-gap) 0 0;
+  padding: 0;
+}
+.ck-foot__link {
+  display: inline-block;
+  color: var(--ck-body);
+  text-decoration: none;
+  font-size: var(--ck-link-size);
+  font-weight: var(--ck-link-weight);
+  line-height: var(--ck-link-lh);
+  transition: color var(--ck-speed) ease;
+}
+.ck-foot__link:hover { color: var(--ck-hover); }
+.ck-foot__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ck-gap);
+  margin-top: var(--ck-gap);
+  padding-top: var(--ck-gap);
+  border-top: 1px solid var(--ck-border);
+  border-radius: var(--ck-radius);
+}
+.ck-foot__payments { height: auto; max-width: 100%; }
+.ck-foot__legal {
+  margin: 0;
+  color: var(--ck-body);
+  font-family: var(--ck-font-legal);
+  font-size: var(--ck-legal-size);
+}
+.ck-foot__legal a { color: inherit; }
+
+@media screen and (min-width: 750px) {
+  .ck-foot__grid { grid-template-columns: repeat(var(--ck-cols-tablet), minmax(0, 1fr)); }
+}
+@media screen and (min-width: 990px) {
+  .ck-foot[data-ck-root] { padding-top: var(--ck-pad-top); padding-bottom: var(--ck-pad-bottom); }
+  .ck-foot__grid { grid-template-columns: repeat(var(--ck-cols), minmax(0, 1fr)); }
+  .ck-foot__brand { grid-column: span 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-foot * { transition: none !important; }
+}
+
+</style>
+<style>
+  
+    
+      @font-face {
+        font-family: 'CK Nunito';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(assets/ck-nunito-400.woff2) format('woff2');
+      }
+    
+      @font-face {
+        font-family: 'CK Nunito';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(assets/ck-nunito-500.woff2) format('woff2');
+      }
+    
+      @font-face {
+        font-family: 'CK Nunito';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(assets/ck-nunito-600.woff2) format('woff2');
+      }
+    
+      @font-face {
+        font-family: 'CK Nunito';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(assets/ck-nunito-700.woff2) format('woff2');
+      }
+    
+      @font-face {
+        font-family: 'CK Nunito';
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url(assets/ck-nunito-800.woff2) format('woff2');
+      }
+    
+      @font-face {
+        font-family: 'CK Nunito';
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url(assets/ck-nunito-900.woff2) format('woff2');
+      }
+    
+    @font-face {
+      font-family: 'CK Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(assets/ck-inter-400.woff2) format('woff2');
+    }
+    @font-face {
+      font-family: 'CK Jost';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(assets/ck-jost-400.woff2) format('woff2');
+    }
+    @font-face {
+      font-family: 'CK Satoshi';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(assets/ck-satoshi-medium.otf) format('opentype');
+    }
+  
+
+  :root {
+    
+      --ck-font-heading: 'CK Nunito', 'Nunito', system-ui, sans-serif;
+      --ck-font-body: 'CK Nunito', 'Nunito', system-ui, sans-serif;
+      --ck-font-price: 'CK Inter', 'Inter', system-ui, sans-serif;
+      --ck-font-legal: 'CK Jost', 'Jost', system-ui, sans-serif;
+      --ck-font-accent: 'CK Satoshi', system-ui, sans-serif;
+    
+    --ck-brand: #f28934;
+    --ck-brand-alt: #ffc536;
+    --ck-ink: #000000;
+    --ck-muted: #686868;
+    --ck-container: 1200px;
+    --ck-radius-lg: 20px;
+  }
+</style>
+
+<link rel="stylesheet" href="overrides.css">
+</head><body>
+<div id="shopify-section-ck_hero" class="shopify-section"><div
+  class="ck-hero color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 90px;
+    --ck-pad-bottom: 110px;
+    --ck-pad-top-m: 40px;
+    --ck-max: 1260px;
+    --ck-gap: 16px;
+    --ck-cols: 2;
+    --ck-cols-tablet: 1;
+    --ck-cols-mobile: 1;
+    --ck-align: center;
+    --ck-radius: 20px;
+    --ck-bg: #ffffff;
+    --ck-ink: #000000;
+    --ck-accent: #f28934;
+    --ck-card-bg: #f28934;
+    --ck-card-fg: #ffffff;
+    --ck-card-pad: 24px;
+    --ck-card-img-w: 85%;
+    --ck-btn-bg: #000000;
+    --ck-btn-fg: #ffffff;
+    --ck-btn-hover: #2b2b2b;
+    --ck-btn-pad-y: 16px;
+    --ck-btn-pad-x: 32px;
+    --ck-h-size: 60px;
+    --ck-h-size-m: 28px;
+    --ck-h-weight: 800;
+    --ck-h-lh: 1.3;
+    --ck-ls: 0em;
+    --ck-body-size: 14px;
+    --ck-card-title-size: 30px;
+    --ck-price-size: 40px;
+    --ck-compare-size: 20px;
+    --ck-btn-size: 16px;
+    --ck-art-shift: 120px;
+    --ck-art-shift-m: -110px;
+    --ck-speed: 500ms;
+    --ck-anim-delay: 100ms;
+  "
+  data-animate="slide"
+  
+><div class="ck-hero__bg" style="background-image: url(assets/ck-hero-bg.png);"></div><div class="ck-hero__inner">
+    <h1 class="ck-hero__heading">
+      <span class="ck-hero__heading-a">Puppy Training Pads for</span>
+      <span class="ck-hero__heading-b">Cleaner Homes</span>
+    </h1>
+
+    <div class="ck-hero__grid">
+      <div class="ck-hero__art"><span class="ck-hero__decor" style="background-image: url(assets/ck-paw-prints.png);"></span><img
+            class="ck-hero__art-top"
+            src="assets/ck-hero-food.png"
+            alt=""
+            width="939"
+            height="596"
+            loading="eager"
+          ><img
+            class="ck-hero__art-main"
+            src="assets/ck-hero-dog.png"
+            alt=""
+            width="493"
+            height="581"
+            loading="eager"
+          ></div>
+
+      <div class="ck-hero__card"><img
+            class="ck-hero__card-image"
+            src="assets/ck-product-1.png"
+            alt=""
+            width="1400"
+            height="1400"
+            loading="eager"
+          ><p class="ck-hero__eyebrow">Super absorbent, leak-resistant, fresh scented</p>
+        <p class="ck-hero__card-title">Economy Value Potty Pads</p>
+
+        <p class="ck-hero__prices">
+          <span class="ck-hero__price">$79.99</span></p><a class="ck-hero__button" href="#">
+            <span class="ck-hero__button-label">Get it now</span>
+            <svg class="ck-hero__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a><img class="ck-hero__payments" src="assets/ck-payments-hero.svg" alt="" width="232" height="26" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_features" class="shopify-section"><div
+  class="ck-feat color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 60px;
+    --ck-pad-bottom: 60px;
+    --ck-pad-mobile: 32px;
+    --ck-max: 1260px;
+    --ck-gap: 32px;
+    --ck-box-gap: 30px;
+    --ck-cols: 2;
+    --ck-cols-tablet: 1;
+    --ck-cols-mobile: 1;
+    --ck-align: center;
+    --ck-radius: 20px;
+    --ck-box-pad: 48px;
+    --ck-box-max: 510px;
+    --ck-box-pad-m: 18px;
+    --ck-icon-size: 50px;
+    --ck-bg: #ffffff;
+    --ck-ink: #000000;
+    --ck-accent: #f28934;
+    --ck-h-size: 50px;
+    --ck-h-size-m: 26px;
+    --ck-h-weight: 800;
+    --ck-h-lh: 1.4;
+    --ck-box-title-size: 30px;
+    --ck-box-title-size-m: 18px;
+    --ck-box-text-size: 14px;
+    --ck-box-lh: 1.7;
+    --ck-speed: 300ms;
+    --ck-anim-delay: 100ms;
+  "
+  data-animate="slide"
+  data-media-position="right"
+>
+  <div class="ck-feat__inner">
+    <h2 class="ck-feat__heading">
+      <span class="ck-feat__heading-a">The Everyday Puppy</span>
+      <span class="ck-feat__heading-b">Training Pad</span>
+    </h2>
+
+    <div class="ck-feat__grid">
+      <div class="ck-feat__boxes"><div
+            class="ck-feat__box"
+            
+            style="
+              --ck-box-bg: #fff5d1;
+              --ck-box-ink: #000000;
+              --ck-box-fg: #686868;
+              --ck-box-icon: #000000;
+            "
+          >
+            <span class="ck-feat__icon"><svg class="ck-icon" width="50" height="50" viewBox="0 0 54 47" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M32.8779 17.0426C32.6711 18.7109 31.4302 19.9689 30.1065 19.8523C28.7827 19.7358 27.8773 18.289 28.0841 16.6208C28.2909 14.9525 29.4903 14.0284 30.8142 14.1449C32.138 14.2614 33.0847 15.3743 32.8779 17.0426ZM35.0184 19.8691C33.7522 19.7591 32.6049 20.6319 32.4071 22.2075C32.2092 23.7831 33.0753 25.1495 34.3415 25.2596C35.6076 25.3696 36.7946 24.1815 36.9923 22.606C37.1901 21.0305 36.2846 19.9791 35.0184 19.8691ZM17.0077 22.6059C17.2055 24.1815 18.3924 25.3695 19.6585 25.2595C20.9247 25.1494 21.7908 23.783 21.5929 22.2074C21.3951 20.6318 20.2478 19.7589 18.9816 19.869C17.7154 19.9791 16.8098 21.0303 17.0077 22.6059ZM21.1221 17.0426C21.3289 18.7109 22.5698 19.9689 23.8935 19.8523C25.2173 19.7358 26.1227 18.289 25.9159 16.6208C25.7091 14.9525 24.5097 14.0284 23.1858 14.1449C21.862 14.2614 20.9153 15.3743 21.1221 17.0426ZM20.6719 30.0373C20.6719 32.4547 23.2831 33.1118 26.8945 33.1118C30.506 33.1118 33.1172 32.4547 33.1172 30.0373C33.1172 28.5783 30.0586 22.0861 26.8945 22.0861C23.7305 22.0861 20.6719 28.5783 20.6719 30.0373ZM28.6432 46.209C30.3292 44.1034 32.7279 42.0191 35.8105 39.5374C36.7199 38.8054 36.8667 37.471 36.1383 36.557C35.4102 35.6429 34.0826 35.4954 33.1734 36.2275C30.7345 38.1909 28.6821 39.9389 26.9995 41.6888C24.7166 39.3151 21.846 37.0318 18.8427 34.6433C11.6531 28.925 4.21875 23.012 4.21875 15.4014C4.21875 8.83007 8.46904 4.24064 14.5547 4.24064C21.8966 4.24064 24.9584 9.70927 25.1311 10.0295C25.4951 10.7499 26.2215 11.2005 27.0269 11.1911C27.8307 11.1806 28.5464 10.7133 28.8919 9.98416C29.0584 9.65838 31.9451 4.24064 39.4454 4.24064C45.5311 4.24064 49.7814 8.83007 49.7814 15.4014C49.7814 21.3648 45.0857 26.2464 40.4923 30.235C39.6107 31.0006 39.5134 32.3396 40.2749 33.2256C41.0366 34.1117 42.3687 34.2095 43.2501 33.444C46.607 30.529 48.9604 28.0013 50.6561 25.4891C52.9062 22.1559 54 18.8561 54 15.4014C54 10.8981 52.5291 7.02059 49.7464 4.18795C47.0934 1.4873 43.4351 0 39.4453 0C32.9927 0 29.0508 3.0734 26.9722 5.43958C24.8575 3.08284 20.8817 0 14.5547 0C10.5649 0 6.90662 1.4873 4.25355 4.18795C1.47087 7.02059 0 10.8981 0 15.4014C0 25.0643 8.61985 31.92 16.2251 37.9689C19.813 40.8225 23.202 43.518 25.3568 46.2091C25.5545 46.456 25.8047 46.6552 26.0891 46.7921C26.3734 46.929 26.6847 47 27 47C27.3153 47 27.6266 46.9289 27.911 46.792C28.1953 46.6551 28.4455 46.4559 28.6432 46.209Z"/></svg></span>
+            <div class="ck-feat__box-body">
+              <h3 class="ck-feat__box-title">Super Absorbent Core</h3>
+              <div class="ck-feat__box-text"><p>Multi-layer design quickly locks in moisture for reliable performance, pad after pad.</p></div>
+            </div>
+          </div><div
+            class="ck-feat__box"
+            
+            style="
+              --ck-box-bg: #d1e6ff;
+              --ck-box-ink: #000000;
+              --ck-box-fg: #686868;
+              --ck-box-icon: #000000;
+            "
+          >
+            <span class="ck-feat__icon"><svg class="ck-icon" width="50" height="50" viewBox="0 0 54 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M8.01562 11.1797C8.01562 12.0534 8.72395 12.7617 9.59766 12.7617C10.4714 12.7617 11.1797 12.0534 11.1797 11.1797C12.0534 11.1797 12.7617 10.4714 12.7617 9.59766C12.7617 8.72395 12.0534 8.01562 11.1797 8.01562C11.1797 7.14192 10.4714 6.43359 9.59766 6.43359C8.72395 6.43359 8.01562 7.14192 8.01562 8.01562C7.14192 8.01562 6.43359 8.72395 6.43359 9.59766C6.43359 10.4714 7.14192 11.1797 8.01562 11.1797ZM8.01562 33.3229C8.01562 34.1966 8.72395 34.9049 9.59766 34.9049C10.4714 34.9049 11.1797 34.1966 11.1797 33.3229C12.0534 33.3229 12.7617 32.6145 12.7617 31.7408C12.7617 30.8671 12.0534 30.1588 11.1797 30.1588C11.1797 29.2851 10.4714 28.5768 9.59766 28.5768C8.72395 28.5768 8.01562 29.2851 8.01562 30.1588C7.14192 30.1588 6.43359 30.8671 6.43359 31.7408C6.43359 32.6145 7.14192 33.3229 8.01562 33.3229ZM19.0898 11.1797C19.0898 12.0534 19.7982 12.7617 20.6719 12.7617C21.5456 12.7617 22.2539 12.0534 22.2539 11.1797C23.1276 11.1797 23.8359 10.4714 23.8359 9.59766C23.8359 8.72395 23.1276 8.01562 22.2539 8.01562C22.2539 7.14192 21.5456 6.43359 20.6719 6.43359C19.7982 6.43359 19.0898 7.14192 19.0898 8.01562C18.2161 8.01562 17.5078 8.72395 17.5078 9.59766C17.5078 10.4714 18.2161 11.1797 19.0898 11.1797ZM22.2539 30.1588C22.2539 29.2851 21.5456 28.5768 20.6719 28.5768C19.7982 28.5768 19.0898 29.2851 19.0898 30.1588C18.2161 30.1588 17.5078 30.8671 17.5078 31.7408C17.5078 32.6145 18.2161 33.3229 19.0898 33.3229C19.0898 34.1966 19.7982 34.9049 20.6719 34.9049C21.5456 34.9049 22.2539 34.1966 22.2539 33.3229C23.1276 33.3229 23.8359 32.6145 23.8359 31.7408C23.8359 30.8671 23.1276 30.1588 22.2539 30.1588ZM11.9747 20.6692C11.9747 21.5429 12.683 22.2513 13.5567 22.2513C13.5567 23.125 14.2651 23.8333 15.1388 23.8333C16.0125 23.8333 16.7208 23.125 16.7208 22.2513C17.5945 22.2513 18.3028 21.5429 18.3028 20.6692C18.3028 19.7955 17.5945 19.0872 16.7208 19.0872C16.7208 18.2135 16.0125 17.5052 15.1388 17.5052C14.2651 17.5052 13.5567 18.2135 13.5567 19.0872C12.683 19.0872 11.9747 19.7955 11.9747 20.6692ZM30.1641 11.1797C30.1641 12.0534 30.8724 12.7617 31.7461 12.7617C32.6198 12.7617 33.3281 12.0534 33.3281 11.1797C34.2018 11.1797 34.9102 10.4714 34.9102 9.59766C34.9102 8.72395 34.2018 8.01562 33.3281 8.01562C33.3281 7.14192 32.6198 6.43359 31.7461 6.43359C30.8724 6.43359 30.1641 7.14192 30.1641 8.01562C29.2904 8.01562 28.582 8.72395 28.582 9.59766C28.582 10.4714 29.2904 11.1797 30.1641 11.1797Z"/><path d="M52.418 18.1406H41.3438V4.74609C41.3438 2.1291 39.2147 0 36.5977 0H4.74609C2.1291 0 0 2.1291 0 4.74609V42.9258C0 45.5428 2.1291 47.6719 4.74609 47.6719H24.4582V52.418C24.4582 53.2917 25.1665 54 26.0402 54H52.418C53.2917 54 54 53.2917 54 52.418V19.7227C54 18.849 53.2917 18.1406 52.418 18.1406ZM50.8359 24.4688H47.3169V21.3047H50.8359V24.4688ZM34.3055 24.4688V21.3047H44.1528V24.4688H34.3055ZM27.6223 24.4688V21.3047H31.1413V24.4688H27.6223ZM3.16406 4.74609C3.16406 3.87376 3.87376 3.16406 4.74609 3.16406H36.5977C37.47 3.16406 38.1797 3.87376 38.1797 4.74609V18.1406H26.0402C25.1665 18.1406 24.4582 18.849 24.4582 19.7227V38.0742H4.74609C3.87376 38.0742 3.16406 37.3645 3.16406 36.4922V4.74609ZM4.74609 44.5078C3.87376 44.5078 3.16406 43.7981 3.16406 42.9258V40.9662C3.67202 41.1465 4.20709 41.2385 4.74609 41.2383H24.4582V44.5078H4.74609ZM27.6223 50.8359V27.6328H50.8359V50.8359H27.6223Z"/><path d="M39.2291 29.7422C33.9951 29.7422 29.7369 34.0004 29.7369 39.2344C29.7369 44.4684 33.9951 48.7266 39.2291 48.7266C44.4631 48.7266 48.7213 44.4684 48.7213 39.2344C48.7213 34.0004 44.4631 29.7422 39.2291 29.7422ZM39.2291 45.5625C35.7398 45.5625 32.901 42.7237 32.901 39.2344C32.901 35.745 35.7398 32.9062 39.2291 32.9062C42.7184 32.9062 45.5572 35.745 45.5572 39.2344C45.5572 42.7237 42.7184 45.5625 39.2291 45.5625Z"/><path d="M40.4376 37.1619L38.4222 39.1773L38.0584 38.7876C37.4622 38.1488 36.461 38.1146 35.8224 38.7107C35.1836 39.3069 35.1493 40.308 35.7455 40.9467L37.2267 42.5333C37.8385 43.1885 38.87 43.2041 39.5017 42.5724L42.6749 39.3991C43.2927 38.7813 43.2927 37.7796 42.6749 37.1618C42.0571 36.5441 41.0554 36.5442 40.4376 37.1619Z"/></svg></span>
+            <div class="ck-feat__box-body">
+              <h3 class="ck-feat__box-title">Fresh Scented Odor Control</h3>
+              <div class="ck-feat__box-text"><p>Helps neutralize unwanted smells and keeps indoor spaces feeling fresh between changes.</p></div>
+            </div>
+          </div><div
+            class="ck-feat__box"
+            
+            style="
+              --ck-box-bg: #f0ffd1;
+              --ck-box-ink: #000000;
+              --ck-box-fg: #686868;
+              --ck-box-icon: #000000;
+            "
+          >
+            <span class="ck-feat__icon"><svg class="ck-icon" width="50" height="50" viewBox="0 0 54 56" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M46.1694 28.8548C48.1398 28.8761 50.2424 28.0186 51.6514 26.6099C54.7875 23.473 54.7823 18.364 51.6391 15.2206C48.8221 12.4036 44.638 12.164 40.9803 14.6096C40.1553 15.1608 39.1918 15.1586 38.6368 14.6041C38.4646 14.4318 37.9411 13.9085 38.327 12.2879C38.7231 10.6271 38.483 8.79506 37.6327 6.98857C36.8688 5.36464 35.7956 4.11151 35.0304 3.34586C32.877 1.19287 30.0121 0.00437511 26.9638 0H26.9466C23.9029 0 21.0458 1.18095 18.9006 3.32617C16.2182 6.00855 15.0224 9.6517 15.7013 13.0706C15.7964 13.5521 15.647 14.0743 15.3201 14.4011C14.8177 14.9031 13.9611 14.9475 12.8425 14.5293C11.9162 14.1828 9.09717 13.1287 7.06428 15.162C6.07988 16.1464 5.56077 17.5863 5.67617 19.0142C5.77012 20.173 6.36229 21.2898 7.26083 22.002C7.979 22.5719 8.61864 22.8761 9.13261 23.1201L9.36077 23.2295C9.96836 23.5256 10.4075 23.7392 10.9143 24.2143C11.8056 25.0497 12.3072 26.178 12.3263 27.3923C12.3451 28.5368 11.9098 29.6396 11.1317 30.4177C10.4417 31.1077 9.64614 31.5046 8.55192 31.7058C8.32682 31.7473 8.0991 31.787 7.86919 31.8264C6.04181 32.1412 3.97009 32.498 2.35032 34.1182C0.831064 35.6374 -0.00381511 37.6609 1.3107e-05 39.816C0.00384132 41.9663 0.842986 43.9873 2.36279 45.5071C3.87657 47.0205 5.87655 47.8732 7.99486 47.907C10.1324 47.9403 12.1311 47.14 13.6205 45.6506L13.7098 45.5596C14.0662 45.1905 14.66 44.5466 14.9429 44.2121C15.0949 44.0322 15.2544 43.8587 15.4209 43.6921C17.0176 42.0954 19.0322 41.3665 20.8095 41.7417C21.9123 41.9745 23.4205 42.7543 24.3485 45.1543L24.3856 45.2481C25.2743 47.5494 26.4916 50.7004 28.4459 52.6546C30.5988 54.8076 33.4623 55.9962 36.5095 56.0013H36.5292C39.5729 56.0013 42.4304 54.8195 44.5761 52.6739C46.7423 50.5076 47.9583 47.707 48.0002 44.788C48.0428 41.8361 46.8854 39.0248 44.7415 36.8723L44.6778 36.8099C43.7943 35.9561 43.1422 35.3169 42.9316 35.0965C41.6532 33.7665 41.7973 31.5008 43.2524 30.0455C44.0754 29.223 45.0026 28.8419 46.1694 28.8548ZM40.5641 37.3666C40.8923 37.7097 41.8549 38.6432 42.3919 39.1619L42.4249 39.1944C43.9353 40.7141 44.7505 42.6837 44.7209 44.7409C44.6914 46.8016 43.8164 48.7952 42.257 50.3543C40.7311 51.8804 38.6971 52.7209 36.5296 52.7209V54.3611L36.5279 52.7209H36.5155C34.3424 52.7175 32.301 51.8702 30.7659 50.335C29.3021 48.8713 28.2293 46.0941 27.4431 44.0587L27.4059 43.9647C26.2703 41.0273 24.1686 39.0982 21.488 38.5321C20.9575 38.4206 20.4168 38.3646 19.8747 38.3651C17.4863 38.3651 15.0446 39.4298 13.1023 41.3725C12.871 41.6039 12.6495 41.8447 12.4383 42.0945C12.2089 42.3658 11.6683 42.9513 11.3544 43.2769L11.2958 43.3362C10.4409 44.1886 9.28727 44.6444 8.0478 44.6274C6.78613 44.6068 5.59063 44.0954 4.68225 43.1871C3.78076 42.2856 3.28309 41.0863 3.28047 39.8101C3.27828 38.5334 3.77179 37.3358 4.67033 36.4373C5.55388 35.5537 6.94888 35.3136 8.42592 35.0589C8.66775 35.0175 8.90827 34.9757 9.1454 34.932C10.886 34.612 12.2944 33.8943 13.4513 32.7373C14.8545 31.3342 15.6397 29.3663 15.6065 27.3388C15.5727 25.2286 14.7032 23.2692 13.1578 21.8208C12.2891 21.0065 11.4958 20.6206 10.7964 20.2801C10.7121 20.2391 10.6271 20.1985 10.5408 20.1575C10.1029 19.9495 9.72489 19.7696 9.29886 19.4316C9.17111 19.3303 8.97117 19.0651 8.9459 18.7497C8.90871 18.2903 9.08481 17.7806 9.38429 17.4812C9.65128 17.2137 10.1349 17.0189 11.6932 17.6017C13.0364 18.1042 14.2917 18.2212 15.4248 17.9495C16.2733 17.7461 17.0394 17.3209 17.6397 16.7207C18.7352 15.6247 19.2256 13.9824 18.9194 12.4327C18.4541 10.0892 19.3141 7.55176 21.2201 5.64585C22.7454 4.12004 24.7792 3.28045 26.9466 3.28045H26.9591C29.133 3.28352 31.1756 4.13076 32.7107 5.66587C33.2918 6.24645 34.1023 7.18983 34.6651 8.38533C35.1948 9.51159 35.3581 10.5977 35.1363 11.5274C34.4669 14.3413 35.4088 16.0149 36.3177 16.9237C37.9933 18.5993 40.6603 18.7694 42.8034 17.3364C45.1725 15.7526 47.6084 15.829 49.3195 17.5401C51.184 19.4047 51.1896 22.4326 49.3318 24.2904C48.5385 25.0838 47.3127 25.5914 46.204 25.5747C44.1565 25.5585 42.3787 26.2805 40.9333 27.7259C38.224 30.4348 38.0599 34.7608 40.5641 37.3665V37.3666Z"/></svg></span>
+            <div class="ck-feat__box-body">
+              <h3 class="ck-feat__box-title">Leak-Resistant Bottom Layer</h3>
+              <div class="ck-feat__box-text"><p>Helps protect floors, carpets and other indoor surfaces from spills during potty training.</p></div>
+            </div>
+          </div></div>
+
+      <div class="ck-feat__media"><img class="ck-feat__decor" src="assets/ck-bone.png" alt="" width="402" height="343" loading="lazy"><img class="ck-feat__image" src="assets/ck-product-1.png" alt="" width="1400" height="1400" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_product" class="shopify-section"><div
+  class="ck-pdp color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 40px;
+    --ck-pad-bottom: 0px;
+    --ck-pad-mobile: 24px;
+    --ck-max: 1260px;
+    --ck-gap: 24px;
+    --ck-stack: 32px;
+    --ck-cols: 5;
+    --ck-cols-tablet: 1;
+    --ck-cols-mobile: 1;
+    --ck-media-span: 3;
+    --ck-info-span: 2;
+    --ck-align: left;
+    --ck-radius: 10px;
+    --ck-thumb-size: 118px;
+    --ck-swatch-size: 34px;
+    --ck-option-pad: 13px;
+    --ck-qty-h: 58px;
+    --ck-btn-pad: 20px;
+    --ck-save-radius: 50px;
+    --ck-bg: #ffffff;
+    --ck-ink: #000000;
+    --ck-body: #686868;
+    --ck-accent: #f28934;
+    --ck-muted: #8f93a0;
+    --ck-alert: #ff0000;
+    --ck-badge-bg: #f28934;
+    --ck-badge-fg: #ffffff;
+    --ck-border: #e4e4e4;
+    --ck-btn-bg: #f28934;
+    --ck-btn-fg: #ffffff;
+    --ck-btn-hover: #d97622;
+    --ck-qty-bg: #f1f1f1;
+    --ck-title-size: 40px;
+    --ck-title-size-m: 24px;
+    --ck-title-weight: 800;
+    --ck-price-size: 30px;
+    --ck-compare-size: 20px;
+    --ck-label-size: 16px;
+    --ck-body-size: 14px;
+    --ck-btn-size: 16px;
+    --ck-lh: 1.7;
+    --ck-speed: 300ms;
+  "
+  data-slider-loop="false"
+  data-slider-drag="true"
+  data-currency=""
+  data-add-label="Add to cart"
+  data-sold-out-label="Sold out"
+>
+  <div class="ck-pdp__inner">
+    <div class="ck-pdp__grid">
+      <ck-gallery
+        class="ck-pdp__media"
+        data-speed="300"
+        data-loop="false"
+        data-drag="true"
+      >
+        <div class="ck-pdp__stage"><span class="ck-pdp__ribbon">#1 Best Seller</span><div class="ck-pdp__track" data-track><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-1.png"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="eager"
+                  >
+                </div><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-2.jpg"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="lazy"
+                  >
+                </div><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-3.jpg"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="lazy"
+                  >
+                </div><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-4.jpg"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="lazy"
+                  >
+                </div><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-5.jpg"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="lazy"
+                  >
+                </div><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-6.jpg"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="lazy"
+                  >
+                </div><div class="ck-pdp__slide" data-slide>
+                  <img
+                    class="ck-pdp__slide-image"
+                    src="assets/ck-product-7.jpg"
+                    alt=""
+                    width="642"
+                    height="642"
+                    loading="lazy"
+                  >
+                </div></div>
+        </div><div class="ck-pdp__thumbs" data-thumbs><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="0"
+                  aria-label="Show product image"
+                  aria-current="true"
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-1.png" alt="" width="240" height="240" loading="lazy">
+                </button><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="1"
+                  aria-label="Show product image"
+                  
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-2.jpg" alt="" width="240" height="240" loading="lazy">
+                </button><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="2"
+                  aria-label="Show product image"
+                  
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-3.jpg" alt="" width="240" height="240" loading="lazy">
+                </button><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="3"
+                  aria-label="Show product image"
+                  
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-4.jpg" alt="" width="240" height="240" loading="lazy">
+                </button><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="4"
+                  aria-label="Show product image"
+                  
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-5.jpg" alt="" width="240" height="240" loading="lazy">
+                </button><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="5"
+                  aria-label="Show product image"
+                  
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-6.jpg" alt="" width="240" height="240" loading="lazy">
+                </button><button
+                  class="ck-pdp__thumb"
+                  type="button"
+                  data-thumb="6"
+                  aria-label="Show product image"
+                  
+                >
+                  <img class="ck-pdp__thumb-image" src="assets/ck-product-7.jpg" alt="" width="240" height="240" loading="lazy">
+                </button></div></ck-gallery>
+
+      <div class="ck-pdp__info">
+        <h1 class="ck-pdp__title">Economy Value (28x34 inch) Puppy Training & Potty Pads</h1><p class="ck-pdp__urgency"><svg class="ck-icon" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8"/><path d="M10 5.5V10l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ck-pdp__urgency-text">Hungry up ! Only 3 items left in stock</span>
+          </p><div class="ck-pdp__prices">
+          <span class="ck-pdp__price" data-price>$79.99</span></div><ul class="ck-pdp__bullets"><li class="ck-pdp__bullet"  style="--ck-bullet-icon: #279600;">
+                <span class="ck-pdp__bullet-icon"><svg class="ck-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M6.88 9.44L5.16 7.72C5.01333 7.57333 4.82667 7.5 4.6 7.5C4.37333 7.5 4.18667 7.57333 4.04 7.72C3.89333 7.86667 3.82 8.05333 3.82 8.28C3.82 8.50667 3.89333 8.69333 4.04 8.84L6.32 11.12C6.48 11.28 6.66667 11.36 6.88 11.36C7.09333 11.36 7.28 11.28 7.44 11.12L11.96 6.6C12.1067 6.45333 12.18 6.26667 12.18 6.04C12.18 5.81333 12.1067 5.62667 11.96 5.48C11.8133 5.33333 11.6267 5.26 11.4 5.26C11.1733 5.26 10.9867 5.33333 10.84 5.48L6.88 9.44ZM8 16C6.89333 16 5.85333 15.7899 4.88 15.3696C3.90667 14.9493 3.06 14.3795 2.34 13.66C1.62 12.94 1.05013 12.0933 0.6304 11.12C0.210667 10.1467 0.000533333 9.10667 0 8C0 6.89333 0.210133 5.85333 0.6304 4.88C1.05067 3.90667 1.62053 3.06 2.34 2.34C3.06 1.62 3.90667 1.05013 4.88 0.6304C5.85333 0.210667 6.89333 0.000533333 8 0C9.10667 0 10.1467 0.210133 11.12 0.6304C12.0933 1.05067 12.94 1.62053 13.66 2.34C14.38 3.06 14.9501 3.90667 15.3704 4.88C15.7907 5.85333 16.0005 6.89333 16 8C16 9.10667 15.7899 10.1467 15.3696 11.12C14.9493 12.0933 14.3795 12.94 13.66 13.66C12.94 14.38 12.0933 14.9501 11.12 15.3704C10.1467 15.7907 9.10667 16.0005 8 16ZM8 14.4C9.78667 14.4 11.3 13.78 12.54 12.54C13.78 11.3 14.4 9.78667 14.4 8C14.4 6.21333 13.78 4.7 12.54 3.46C11.3 2.22 9.78667 1.6 8 1.6C6.21333 1.6 4.7 2.22 3.46 3.46C2.22 4.7 1.6 6.21333 1.6 8C1.6 9.78667 2.22 11.3 3.46 12.54C4.7 13.78 6.21333 14.4 8 14.4Z"/></svg></span>
+                <span class="ck-pdp__bullet-text">Optional sticky corner tape</span>
+              </li><li class="ck-pdp__bullet"  style="--ck-bullet-icon: #279600;">
+                <span class="ck-pdp__bullet-icon"><svg class="ck-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M6.88 9.44L5.16 7.72C5.01333 7.57333 4.82667 7.5 4.6 7.5C4.37333 7.5 4.18667 7.57333 4.04 7.72C3.89333 7.86667 3.82 8.05333 3.82 8.28C3.82 8.50667 3.89333 8.69333 4.04 8.84L6.32 11.12C6.48 11.28 6.66667 11.36 6.88 11.36C7.09333 11.36 7.28 11.28 7.44 11.12L11.96 6.6C12.1067 6.45333 12.18 6.26667 12.18 6.04C12.18 5.81333 12.1067 5.62667 11.96 5.48C11.8133 5.33333 11.6267 5.26 11.4 5.26C11.1733 5.26 10.9867 5.33333 10.84 5.48L6.88 9.44ZM8 16C6.89333 16 5.85333 15.7899 4.88 15.3696C3.90667 14.9493 3.06 14.3795 2.34 13.66C1.62 12.94 1.05013 12.0933 0.6304 11.12C0.210667 10.1467 0.000533333 9.10667 0 8C0 6.89333 0.210133 5.85333 0.6304 4.88C1.05067 3.90667 1.62053 3.06 2.34 2.34C3.06 1.62 3.90667 1.05013 4.88 0.6304C5.85333 0.210667 6.89333 0.000533333 8 0C9.10667 0 10.1467 0.210133 11.12 0.6304C12.0933 1.05067 12.94 1.62053 13.66 2.34C14.38 3.06 14.9501 3.90667 15.3704 4.88C15.7907 5.85333 16.0005 6.89333 16 8C16 9.10667 15.7899 10.1467 15.3696 11.12C14.9493 12.0933 14.3795 12.94 13.66 13.66C12.94 14.38 12.0933 14.9501 11.12 15.3704C10.1467 15.7907 9.10667 16.0005 8 16ZM8 14.4C9.78667 14.4 11.3 13.78 12.54 12.54C13.78 11.3 14.4 9.78667 14.4 8C14.4 6.21333 13.78 4.7 12.54 3.46C11.3 2.22 9.78667 1.6 8 1.6C6.21333 1.6 4.7 2.22 3.46 3.46C2.22 4.7 1.6 6.21333 1.6 8C1.6 9.78667 2.22 11.3 3.46 12.54C4.7 13.78 6.21333 14.4 8 14.4Z"/></svg></span>
+                <span class="ck-pdp__bullet-text">Ideal for puppies and small to medium dogs</span>
+              </li><li class="ck-pdp__bullet"  style="--ck-bullet-icon: #279600;">
+                <span class="ck-pdp__bullet-icon"><svg class="ck-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M6.88 9.44L5.16 7.72C5.01333 7.57333 4.82667 7.5 4.6 7.5C4.37333 7.5 4.18667 7.57333 4.04 7.72C3.89333 7.86667 3.82 8.05333 3.82 8.28C3.82 8.50667 3.89333 8.69333 4.04 8.84L6.32 11.12C6.48 11.28 6.66667 11.36 6.88 11.36C7.09333 11.36 7.28 11.28 7.44 11.12L11.96 6.6C12.1067 6.45333 12.18 6.26667 12.18 6.04C12.18 5.81333 12.1067 5.62667 11.96 5.48C11.8133 5.33333 11.6267 5.26 11.4 5.26C11.1733 5.26 10.9867 5.33333 10.84 5.48L6.88 9.44ZM8 16C6.89333 16 5.85333 15.7899 4.88 15.3696C3.90667 14.9493 3.06 14.3795 2.34 13.66C1.62 12.94 1.05013 12.0933 0.6304 11.12C0.210667 10.1467 0.000533333 9.10667 0 8C0 6.89333 0.210133 5.85333 0.6304 4.88C1.05067 3.90667 1.62053 3.06 2.34 2.34C3.06 1.62 3.90667 1.05013 4.88 0.6304C5.85333 0.210667 6.89333 0.000533333 8 0C9.10667 0 10.1467 0.210133 11.12 0.6304C12.0933 1.05067 12.94 1.62053 13.66 2.34C14.38 3.06 14.9501 3.90667 15.3704 4.88C15.7907 5.85333 16.0005 6.89333 16 8C16 9.10667 15.7899 10.1467 15.3696 11.12C14.9493 12.0933 14.3795 12.94 13.66 13.66C12.94 14.38 12.0933 14.9501 11.12 15.3704C10.1467 15.7907 9.10667 16.0005 8 16ZM8 14.4C9.78667 14.4 11.3 13.78 12.54 12.54C13.78 11.3 14.4 9.78667 14.4 8C14.4 6.21333 13.78 4.7 12.54 3.46C11.3 2.22 9.78667 1.6 8 1.6C6.21333 1.6 4.7 2.22 3.46 3.46C2.22 4.7 1.6 6.21333 1.6 8C1.6 9.78667 2.22 11.3 3.46 12.54C4.7 13.78 6.21333 14.4 8 14.4Z"/></svg></span>
+                <span class="ck-pdp__bullet-text">300-count economy value pack</span>
+              </li></ul><div class="ck-pdp__form"><input type="hidden" name="id" value="" data-variant-id><div class="ck-pdp__actions"><div class="ck-pdp__qty">
+                <button class="ck-pdp__qty-btn ck-pdp__qty-btn--minus" type="button" data-qty-step="-1" aria-label="Decrease quantity"><svg class="ck-icon" width="16" height="16" viewBox="0 0 12 2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="12" height="2" rx="1"/></svg></button>
+                <input class="ck-pdp__qty-input" type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Quantity" data-qty-input>
+                <button class="ck-pdp__qty-btn ck-pdp__qty-btn--plus" type="button" data-qty-step="1" aria-label="Increase quantity"><svg class="ck-icon" width="16" height="16" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M5 0h2v5h5v2H7v5H5V7H0V5h5V0Z"/></svg></button>
+              </div><button class="ck-pdp__submit" type="submit" name="add" data-submit >
+              <span data-submit-text>Add to cart</span>
+            </button>
+          </div></div><div class="ck-pdp__trust">
+            <span class="ck-pdp__trust-badge"><svg class="ck-icon" width="25" height="25" viewBox="0 0 25 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M12.5 0.935547L0.125 5.29955V15.8555C0.127967 17.9158 0.632013 19.9463 1.5962 21.7822C2.56039 23.6181 3.95753 25.2076 5.67416 26.4216L12.5 31.2355L19.3258 26.4216C21.0425 25.2076 22.4396 23.6181 23.4038 21.7822C24.368 19.9463 24.872 17.9158 24.875 15.8555V5.29955L12.5 0.935547ZM22.8125 15.8555C22.8097 17.6004 22.3827 19.32 21.5661 20.8749C20.7496 22.4297 19.5666 23.776 18.1131 24.8045L12.5 28.7635L6.88691 24.8045C5.43338 23.776 4.25036 22.4297 3.43386 20.8749C2.61735 19.32 2.19035 17.6004 2.1875 15.8555V6.69955L12.5 3.06355L22.8125 6.69955V15.8555Z"/><path d="M8.07244 13.543L6.61426 14.957L11.2105 19.414L18.3849 12.457L16.9268 11.043L11.2105 16.586L8.07244 13.543Z"/></svg><span class="ck-pdp__trust-label">Secure checkout</span>
+            </span><img class="ck-pdp__trust-image" src="assets/ck-trust-checkout.svg" alt="" width="304" height="32" loading="lazy"></div></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_shipping" class="shopify-section"><div
+  class="ck-note color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 24px;
+    --ck-pad-bottom: 24px;
+    --ck-pad-mobile: 16px;
+    --ck-max: 1260px;
+    --ck-gap: 16px;
+    --ck-cols: 1;
+    --ck-cols-tablet: 1;
+    --ck-cols-mobile: 1;
+    --ck-align: left;
+    --ck-justify: start;
+    --ck-radius: 0px;
+    --ck-bg: #ffffff;
+    --ck-size: 18px;
+    --ck-size-m: 14px;
+    --ck-weight: 800;
+    --ck-lh: 1.3;
+    --ck-speed: 300ms;
+  "
+  data-animate="fade"
+>
+  <div class="ck-note__inner">
+    <ul class="ck-note__list"><li
+          class="ck-note__item"
+          
+          style="--ck-item-fg: #f28934; --ck-item-icon: #f28934; --ck-item-icon-size: 64px;"
+        >
+          <span class="ck-note__icon"><svg class="ck-icon ck-icon--illustrated" width="64" height="64" viewBox="0 0 64 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M26.3845 34.4799C28.4245 32.5506 28.7377 29.5297 27.084 27.7324C25.4303 25.9352 22.436 26.0423 20.396 27.9716C18.356 29.9009 18.0428 32.9219 19.6965 34.7191C21.3501 36.5163 24.3444 36.4093 26.3845 34.4799Z" fill="#454565"/><path d="M53.3791 34.4793C55.4191 32.55 55.7323 29.529 54.0787 27.7318C52.425 25.9346 49.4307 26.0417 47.3907 27.971C45.3507 29.9003 45.0375 32.9213 46.6911 34.7185C48.3448 36.5157 51.3391 36.4086 53.3791 34.4793Z" fill="#454565"/><path d="M4.97023 10.8901C4.97023 9.69615 4.01555 8.72827 2.8379 8.72827C1.66025 8.72827 0.705573 9.69615 0.705573 10.8901C0.705573 12.084 1.66025 13.0519 2.8379 13.0519C4.01555 13.0519 4.97023 12.084 4.97023 10.8901Z" fill="#ED912E"/><path d="M43.2984 30.787C44.0564 26.9888 47.5956 23.9705 51.3994 23.9705C55.2032 23.9705 57.7033 26.7697 57.6309 30.3692C61.5921 30.4743 62.6948 25.1859 62.6948 25.1859C63.0282 23.7071 63.5265 20.8243 63.9436 17.9946C64.0772 17.0881 63.9723 16.1981 63.6401 15.4106C62.9983 13.8888 61.7395 11.1705 59.9012 8.38643C58.5301 6.31008 56.2235 5.0782 53.5935 5.03515C52.025 5.00856 50.484 4.99464 49.3226 4.99464L49.3127 4.98451C49.164 2.44098 47.3346 0.495033 44.7683 0.262076C43.0986 0.110148 36.485 0.00126634 33.3105 0.00126634C32.0492 0.00126634 30.2385 0.0189919 28.4077 0.0493775V0.0417805H28.3952L28.389 0.0392488L28.384 0.0417805H6.38012C5.2025 0.0417805 4.24717 1.01032 4.24717 2.20422V2.21562C4.24717 3.40319 5.19751 4.36667 6.36889 4.36667L10.8059 4.373C11.9061 4.45276 12.7727 5.38206 12.7727 6.51772V6.52911C12.7727 7.72301 11.8174 8.69156 10.6398 8.69156H8.36697C7.18935 8.69156 6.23401 9.6601 6.23401 10.854C6.23401 12.0479 7.18935 13.0164 8.36697 13.0164H10.6398C11.8174 13.0164 12.7727 13.985 12.7727 15.1789C12.7727 16.3728 11.8174 17.3413 10.6398 17.3413H2.13295C0.955333 17.3413 0 18.3099 0 19.5038C0 20.6977 0.955333 21.6662 2.13295 21.6662H10.6423C11.8199 21.6662 12.7752 22.6348 12.7752 23.8287C12.7752 25.0226 11.8199 25.9911 10.6423 25.9911H8.01231C6.83469 25.9911 5.87935 26.9597 5.87935 28.1536C5.87935 29.3475 6.83469 30.316 8.01231 30.316L16.4105 30.3097L17.1098 28.546C18.5397 25.8708 21.3845 23.9768 24.3966 23.9768C28.2017 23.9768 30.9053 26.9976 30.6069 30.7984H43.2959M49.1203 7.99522C50.2343 7.99649 51.6791 8.01168 53.1277 8.03573C54.8836 8.06485 56.4196 8.88147 57.3412 10.2779C58.4564 11.9681 59.348 13.6406 59.9936 14.9789C60.4045 15.8296 59.6477 16.9375 58.6549 16.9375H48.0089L49.1203 7.99522Z" fill="#FAAB48"/><path d="M44.767 0.260811C43.0974 0.108882 36.4837 0 33.3093 0C32.048 0 30.2372 0.0177256 28.4065 0.0481112V0.0405141H28.394L28.3877 0.0379824L28.3827 0.0405141H6.38012C5.20251 0.0405141 4.24717 1.00906 4.24717 2.20296V2.21435C4.24717 3.40192 5.19751 4.3654 6.36889 4.3654L10.8059 4.37173C11.9061 4.4515 12.7727 5.38079 12.7727 6.51645V6.52785C12.7727 7.72175 11.8174 8.69029 10.6398 8.69029H8.36697C7.18935 8.69029 6.23401 9.65883 6.23401 10.8527C6.23401 12.0466 7.18935 13.0152 8.36697 13.0152H10.6398C11.8174 13.0152 12.7727 13.9837 12.7727 15.1776C12.7727 16.3715 11.8174 17.3401 10.6398 17.3401H2.13295C1.07147 17.3401 0.193564 18.1276 0.0299712 19.1581V19.8469C0.193564 20.8762 1.07147 21.665 2.13295 21.665H10.6423C11.8199 21.665 12.7752 22.6335 12.7752 23.8274C12.7752 24.3414 12.5979 24.8124 12.3019 25.1834C15.162 25.4294 18.041 25.3162 20.8737 24.8466C21.9639 24.2895 23.1665 23.973 24.3966 23.973C24.5027 23.973 24.6076 23.9768 24.7125 23.9806C35.5709 20.8534 44.25 12.4771 47.914 1.72818C47.1198 0.911569 46.0333 0.378555 44.7658 0.263342L44.767 0.260811Z" fill="#F8C358"/><path d="M36.8958 8.01801H32.826C32.3414 8.01801 31.8931 8.41682 31.8244 8.90806L30.8391 16.0132C30.7705 16.5045 31.1089 16.9033 31.5934 16.9033H35.6633C36.0903 16.9033 36.485 16.5526 36.5449 16.1196C36.6049 15.6866 36.3076 15.3359 35.8806 15.3359H32.5999C32.5937 15.3359 32.5887 15.3296 32.5887 15.3232L32.9022 13.062C32.9022 13.062 32.9072 13.0532 32.9134 13.0532H35.4659C35.893 13.0532 36.2877 12.7025 36.3476 12.2695C36.4075 11.8365 36.1103 11.4858 35.6832 11.4858H33.1332C33.1269 11.4858 33.1219 11.4794 33.1219 11.4731L33.3829 9.59426C33.3829 9.59426 33.3879 9.5854 33.3942 9.5854H36.6773C37.1044 9.5854 37.499 9.2347 37.5589 8.8017C37.6189 8.36871 37.3217 8.01801 36.8946 8.01801H36.8958ZM22.376 8.01801H18.7258C18.2412 8.01801 17.7929 8.41682 17.7242 8.90806L16.7327 16.0639C16.669 16.5273 16.9874 16.9033 17.4445 16.9033C17.9016 16.9033 18.3237 16.5273 18.3886 16.0639L18.7707 13.3089C18.7707 13.3089 18.7757 13.3 18.782 13.3H20.9149C21.372 13.3 21.7941 12.924 21.859 12.4606C21.9227 11.9973 21.6043 11.6212 21.1472 11.6212H19.0167C19.0105 11.6212 19.0055 11.6149 19.0055 11.6086L19.269 9.70568C19.269 9.70568 19.274 9.69682 19.2802 9.69682H22.1437C22.6008 9.69682 23.0241 9.32079 23.0878 8.85741C23.1515 8.39403 22.8331 8.01801 22.376 8.01801ZM29.7926 8.59154C29.0921 7.98129 27.8545 8.01801 27.8545 8.01801H25.0322C24.5477 8.01801 24.0994 8.41682 24.0307 8.90806L23.0391 16.0639C22.9754 16.5273 23.2939 16.9033 23.7509 16.9033C24.208 16.9033 24.6301 16.5273 24.695 16.0639L24.9948 13.9014C24.9948 13.9014 24.9997 13.8926 25.006 13.8926H26.8355C26.8355 13.8926 26.8442 13.8951 26.8455 13.9002L27.7046 16.431C27.8033 16.721 28.0668 16.9045 28.384 16.9045H28.4152C29.0271 16.9045 29.5179 16.255 29.3268 15.698L28.6163 13.6229C28.6163 13.6229 28.6163 13.6115 28.6225 13.609C29.0259 13.4368 29.3618 13.1899 29.6303 12.8658C30.0686 12.3366 30.3396 11.701 30.4433 10.9566C30.512 10.459 30.4957 10.007 30.3933 9.60186C30.2909 9.19672 30.0911 8.85994 29.7939 8.5928L29.7926 8.59154ZM28.7736 10.9553C28.7736 10.9553 28.6075 12.3252 27.1839 12.3252H25.212L25.5917 9.5854H27.5635C27.5635 9.5854 29.0121 9.49171 28.7736 10.9553ZM43.7155 8.01801H39.6457C39.1612 8.01801 38.7128 8.41682 38.6441 8.90806L37.6588 16.0132C37.5902 16.5045 37.9286 16.9033 38.4131 16.9033H42.483C42.91 16.9033 43.3047 16.5526 43.3646 16.1196C43.4246 15.6866 43.1273 15.3359 42.7003 15.3359H39.4197C39.4134 15.3359 39.4084 15.3296 39.4084 15.3232L39.7219 13.062C39.7219 13.062 39.7269 13.0532 39.7331 13.0532H42.2856C42.7127 13.0532 43.1074 12.7025 43.1673 12.2695C43.2272 11.8365 42.93 11.4858 42.5029 11.4858H39.9529C39.9466 11.4858 39.9417 11.4794 39.9417 11.4731L40.2026 9.59426C40.2026 9.59426 40.2076 9.5854 40.2139 9.5854H43.497C43.9241 9.5854 44.3187 9.2347 44.3786 8.8017C44.4386 8.36871 44.1414 8.01801 43.7143 8.01801H43.7155Z" fill="white"/></svg></span><span class="ck-note__label">Ships Fast & Free from the USA</span></li></ul>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_values" class="shopify-section"><div
+  class="ck-cards color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 115px;
+    --ck-pad-bottom: 20px;
+    --ck-pad-mobile: 40px;
+    --ck-max: 1260px;
+    --ck-gap: 24px;
+    --ck-cols: 3;
+    --ck-cols-tablet: 2;
+    --ck-cols-mobile: 1;
+    --ck-align: center;
+    --ck-radius: 20px;
+    --ck-card-pad: 12px;
+    --ck-media-size: 154px;
+    --ck-media-size-m: 110px;
+    --ck-overlap: 90px;
+    --ck-bg: #ffffff;
+    --ck-title-size: 24px;
+    --ck-title-size-m: 20px;
+    --ck-title-weight: 800;
+    --ck-text-size: 14px;
+    --ck-lh: 1.7;
+    --ck-speed: 300ms;
+    --ck-anim-delay: 100ms;
+  "
+  data-animate="slide"
+  data-hover-lift="true"
+>
+  <div class="ck-cards__inner">
+    <div class="ck-cards__grid"><article
+          class="ck-cards__card"
+          
+          style="--ck-card-bg: #85be5d; --ck-card-fg: #ffffff; --ck-card-ink: #ffffff; --ck-ring: #ffffff;"
+        >
+          <div class="ck-cards__media"><img class="ck-cards__image" src="assets/ck-value-1.png" alt="" width="234" height="234" loading="lazy"></div>
+          <div class="ck-cards__body">
+            <h3 class="ck-cards__title">Built for Absorbency</h3>
+            <div class="ck-cards__text"><p>A multi-layer core pulls moisture in fast and holds it, so accidents stay where they land.</p></div>
+          </div>
+        </article><article
+          class="ck-cards__card"
+          
+          style="--ck-card-bg: #ffc536; --ck-card-fg: #ffffff; --ck-card-ink: #ffffff; --ck-ring: #ffffff;"
+        >
+          <div class="ck-cards__media"><img class="ck-cards__image" src="assets/ck-value-2.png" alt="" width="234" height="234" loading="lazy"></div>
+          <div class="ck-cards__body">
+            <h3 class="ck-cards__title">Kind to Your Floors</h3>
+            <div class="ck-cards__text"><p>The leak-resistant bottom layer helps protect floors, carpets and other indoor surfaces.</p></div>
+          </div>
+        </article><article
+          class="ck-cards__card"
+          
+          style="--ck-card-bg: #ff8787; --ck-card-fg: #ffffff; --ck-card-ink: #ffffff; --ck-ring: #ffffff;"
+        >
+          <div class="ck-cards__media"><img class="ck-cards__image" src="assets/ck-value-3.png" alt="" width="234" height="234" loading="lazy"></div>
+          <div class="ck-cards__body">
+            <h3 class="ck-cards__title">Value by the Pack</h3>
+            <div class="ck-cards__text"><p>300-count economy packs bring the cost per pad down without cutting the quality.</p></div>
+          </div>
+        </article></div>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_stats" class="shopify-section"><div
+  class="ck-stats color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 0px;
+    --ck-pad-bottom: 30px;
+    --ck-pad-mobile: 24px;
+    --ck-max: 1260px;
+    --ck-gap: 32px;
+    --ck-panel-pad: 60px;
+    --ck-cols: 4;
+    --ck-cols-tablet: 2;
+    --ck-cols-mobile: 2;
+    --ck-align: center;
+    --ck-radius: 20px;
+    --ck-bg: #ffffff;
+    --ck-panel-bg: #f6f6f6;
+    --ck-ink: #000000;
+    --ck-body: #000000;
+    --ck-h-size: 30px;
+    --ck-h-size-m: 22px;
+    --ck-h-weight: 800;
+    --ck-sub-size: 16px;
+    --ck-num-size: 50px;
+    --ck-num-size-m: 32px;
+    --ck-num-weight: 800;
+    --ck-label-size: 18px;
+    --ck-label-weight: 800;
+    --ck-lh: 1.4;
+    --ck-speed: 300ms;
+  "
+>
+  <div class="ck-stats__inner">
+    <ck-counters
+      class="ck-stats__panel"
+      data-duration="2000"
+      data-step="50"
+      data-threshold="20"
+      data-delimiter=""
+      data-enabled="true"
+    >
+      <h2 class="ck-stats__heading">Satisfying our customers</h2>
+      <p class="ck-stats__sub">How customers feel about our service?</p>
+
+      <div class="ck-stats__grid"><div
+            class="ck-stats__item"
+            
+            style="--ck-num-color: #f28934; --ck-label-color: #333333;"
+          >
+            <p class="ck-stats__value"><span class="ck-stats__prefix"></span><span
+                class="ck-stats__number"
+                data-count
+                data-to="1810"
+                data-from="0"
+              >0</span><span class="ck-stats__suffix">+</span>
+            </p>
+            <p class="ck-stats__label">Very Satisfied</p>
+          </div><div
+            class="ck-stats__item"
+            
+            style="--ck-num-color: #f28934; --ck-label-color: #333333;"
+          >
+            <p class="ck-stats__value"><span class="ck-stats__prefix"></span><span
+                class="ck-stats__number"
+                data-count
+                data-to="632"
+                data-from="0"
+              >0</span><span class="ck-stats__suffix">+</span>
+            </p>
+            <p class="ck-stats__label">Satisfied</p>
+          </div><div
+            class="ck-stats__item"
+            
+            style="--ck-num-color: #f28934; --ck-label-color: #333333;"
+          >
+            <p class="ck-stats__value"><span class="ck-stats__prefix"></span><span
+                class="ck-stats__number"
+                data-count
+                data-to="394"
+                data-from="0"
+              >0</span><span class="ck-stats__suffix">+</span>
+            </p>
+            <p class="ck-stats__label">Slightly Satisfied</p>
+          </div><div
+            class="ck-stats__item"
+            
+            style="--ck-num-color: #f28934; --ck-label-color: #333333;"
+          >
+            <p class="ck-stats__value"><span class="ck-stats__prefix"></span><span
+                class="ck-stats__number"
+                data-count
+                data-to="101"
+                data-from="0"
+              >0</span><span class="ck-stats__suffix">+</span>
+            </p>
+            <p class="ck-stats__label">Not Satisfied</p>
+          </div></div>
+    </ck-counters>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_newsletter" class="shopify-section"><div
+  class="ck-news color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 0px;
+    --ck-pad-bottom: 0px;
+    --ck-pad-mobile: 24px;
+    --ck-max: 1260px;
+    --ck-gap: 24px;
+    --ck-panel-pad: 24px;
+    --ck-panel-min: 265px;
+    --ck-cols: 1;
+    --ck-cols-tablet: 1;
+    --ck-cols-mobile: 1;
+    --ck-align: center;
+    --ck-radius: 20px;
+    --ck-field-h: 60px;
+    --ck-field-pad: 8px;
+    --ck-form-width: 470px;
+    --ck-bg: #ffffff;
+    --ck-panel-bg: #f28934;
+    --ck-ink: #ffffff;
+    --ck-body: #ffffff;
+    --ck-field-bg: #ffffff;
+    --ck-field-fg: #686868;
+    --ck-btn-bg: #000000;
+    --ck-btn-fg: #ffffff;
+    --ck-btn-hover: #2b2b2b;
+    --ck-h-size: 30px;
+    --ck-h-size-m: 22px;
+    --ck-h-weight: 800;
+    --ck-sub-size: 16px;
+    --ck-field-size: 16px;
+    --ck-lh: 1.4;
+    --ck-speed: 300ms;
+  "
+  data-animate="fade"
+>
+  <div class="ck-news__inner"><div class="ck-news__panel" style="background-image: url(assets/ck-newsletter-bg.png);">
+      <div class="ck-news__content">
+        <h2 class="ck-news__heading">Stay Up to Date</h2>
+        <p class="ck-news__sub">Join Us for Special Offers, the Latest News, and Cute Pet Pics ;)</p>
+
+        <form onsubmit="return false">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="ck-news__field-label" for="ck-news-email-ck_newsletter">Email address</label>
+          <div class="ck-news__row">
+            <input
+              class="ck-news__field"
+              id="ck-news-email-ck_newsletter"
+              type="email"
+              name="contact[email]"
+              value=""
+              autocomplete="email"
+              placeholder="example@gmail.com"
+              required
+            >
+            <button class="ck-news__submit" type="submit" name="commit">Subscribe</button>
+          </div></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div><div id="shopify-section-ck_faq" class="shopify-section"><div
+  class="ck-faq color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 85px;
+    --ck-pad-bottom: 85px;
+    --ck-pad-mobile: 32px;
+    --ck-max: 1260px;
+    --ck-gap: 32px;
+    --ck-item-gap: 12px;
+    --ck-cols: 2;
+    --ck-cols-tablet: 1;
+    --ck-cols-mobile: 1;
+    --ck-align: left;
+    --ck-radius: 10px;
+    --ck-panel-pad: 30px;
+    --ck-item-pad: 22px;
+    --ck-cta-pad-y: 16px;
+    --ck-cta-pad-x: 25px;
+    --ck-cta-radius: 200px;
+    --ck-dialog-width: 520px;
+    --ck-bg: #ffffff;
+    --ck-panel-bg: #f4f4f4;
+    --ck-ink: #000000;
+    --ck-accent: #f28934;
+    --ck-body: #000000;
+    --ck-border: #e4e4e4;
+    --ck-cta-bg: #f28934;
+    --ck-cta-fg: #ffffff;
+    --ck-cta-hover: #d97622;
+    --ck-backdrop: #000000;
+    --ck-backdrop-opacity: 0.45;
+    --ck-h-size: 40px;
+    --ck-h-size-m: 26px;
+    --ck-h-weight: 800;
+    --ck-q-size: 18px;
+    --ck-q-weight: 700;
+    --ck-a-size: 14px;
+    --ck-cta-size: 14px;
+    --ck-lh: 1.6;
+    --ck-speed: 500ms;
+    --ck-icon-speed: 200ms;
+  "
+>
+  <div class="ck-faq__inner">
+    <h2 class="ck-faq__heading">
+      <span class="ck-faq__heading-a">Frequently</span>
+      <span class="ck-faq__heading-b">Asked Questions</span>
+    </h2>
+
+    <div class="ck-faq__grid">
+      <div class="ck-faq__col">
+        <ck-accordion class="ck-faq__list" data-single="true"><details
+              class="ck-faq__item"
+              
+              
+            >
+              <summary class="ck-faq__question">
+                <span class="ck-faq__question-text">What Is The Status Of My Order?</span>
+                <span class="ck-faq__chevron"><svg class="ck-icon" width="13" height="13" viewBox="0 0 14 9" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M14 1.2425L7 8.2425L0 1.2425L1.2425 5.03338e-07L7 5.7575L12.7575 0L14 1.2425Z"/></svg></span>
+              </summary>
+              <div class="ck-faq__answer"><p>To check the status of your order, go to Orders. Here's what you will see:</p><p><strong>Preparing for Shipment:</strong> This means we're currently processing and packing the goodies for your pet. You'll receive an email to let you know we received your order. When your order ships, we'll send another email with tracking information.</p><p><strong>Shipped:</strong> Your order has left our warehouse. Within 24 to 48 hours, you will also see a link to track your package.</p><p><strong>Delivered:</strong> Your order has arrived! Orders are delivered 7 days a week before 10 p.m.</p></div>
+            </details><details
+              class="ck-faq__item"
+              
+              
+            >
+              <summary class="ck-faq__question">
+                <span class="ck-faq__question-text">What Happens If My Package Gets Lost?</span>
+                <span class="ck-faq__chevron"><svg class="ck-icon" width="13" height="13" viewBox="0 0 14 9" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M14 1.2425L7 8.2425L0 1.2425L1.2425 5.03338e-07L7 5.7575L12.7575 0L14 1.2425Z"/></svg></span>
+              </summary>
+              <div class="ck-faq__answer"><p>All items purchased from our site are made pursuant to a shipment contract, meaning that the risk of loss and title for such items pass to you upon our delivery to the carrier.</p></div>
+            </details><details
+              class="ck-faq__item"
+              
+              
+            >
+              <summary class="ck-faq__question">
+                <span class="ck-faq__question-text">How Do I Cancel Or Change My Order?</span>
+                <span class="ck-faq__chevron"><svg class="ck-icon" width="13" height="13" viewBox="0 0 14 9" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M14 1.2425L7 8.2425L0 1.2425L1.2425 5.03338e-07L7 5.7575L12.7575 0L14 1.2425Z"/></svg></span>
+              </summary>
+              <div class="ck-faq__answer"><p>A message about current events: Our teams are focused on serving as many pet parents as possible, and due to high demand for essentials, including medication, we're temporarily not able to change existing orders.</p><p>If your order hasn't shipped yet, you can cancel it from your account. Go to Orders, click on the order you want to cancel, and click the "Cancel This Order" link.</p><p>If you need help canceling your order, please send us a message with your order number. We will resolve it as quickly as possible so that your experience is simple and worry-free. If we have already processed your order, we may not be able to cancel it. In that case, we will issue you a refund. We also accept returns within 365 days of purchase.</p></div>
+            </details><details
+              class="ck-faq__item"
+              
+              
+            >
+              <summary class="ck-faq__question">
+                <span class="ck-faq__question-text">How Do You Ship Fresh, Refrigerated Or Frozen Items?</span>
+                <span class="ck-faq__chevron"><svg class="ck-icon" width="13" height="13" viewBox="0 0 14 9" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M14 1.2425L7 8.2425L0 1.2425L1.2425 5.03338e-07L7 5.7575L12.7575 0L14 1.2425Z"/></svg></span>
+              </summary>
+              <div class="ck-faq__answer"><p>We ship fresh, refrigerated and frozen items separately from other items in your order for the fastest delivery. We use insulated packaging and dry ice to keep items cold or frozen during shipping. The dry ice may be gone when your package arrives, but your items should still feel cold or frozen to the touch.</p></div>
+            </details><details
+              class="ck-faq__item"
+              
+              
+            >
+              <summary class="ck-faq__question">
+                <span class="ck-faq__question-text">How Will I Know My Autoship Is On Its Way?</span>
+                <span class="ck-faq__chevron"><svg class="ck-icon" width="13" height="13" viewBox="0 0 14 9" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M14 1.2425L7 8.2425L0 1.2425L1.2425 5.03338e-07L7 5.7575L12.7575 0L14 1.2425Z"/></svg></span>
+              </summary>
+              <div class="ck-faq__answer"><p>We'll send you a reminder email 3 days before your next scheduled order. You can change your order before it starts processing. We'll send you another email when your order ships.</p></div>
+            </details></ck-accordion><div class="ck-faq__cta">
+            <p class="ck-faq__cta-text">Have you a question?</p>
+            <button class="ck-faq__cta-button" type="button" data-dialog-open>
+              <span class="ck-faq__cta-icon"><svg class="ck-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M9 16H11V14H9V16ZM10 0C8.68678 0 7.38642 0.258658 6.17317 0.761205C4.95991 1.26375 3.85752 2.00035 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C3.85752 17.9997 4.95991 18.7362 6.17317 19.2388C7.38642 19.7413 8.68678 20 10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7362 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 4C8.93913 4 7.92172 4.42143 7.17157 5.17157C6.42143 5.92172 6 6.93913 6 8H8C8 7.46957 8.21071 6.96086 8.58579 6.58579C8.96086 6.21071 9.46957 6 10 6C10.5304 6 11.0391 6.21071 11.4142 6.58579C11.7893 6.96086 12 7.46957 12 8C12 10 9 9.75 9 13H11C11 10.75 14 10.5 14 8C14 6.93913 13.5786 5.92172 12.8284 5.17157C12.0783 4.42143 11.0609 4 10 4Z"/></svg></span>
+              <span class="ck-faq__cta-label">Ask a question</span>
+            </button>
+          </div></div>
+
+      <div class="ck-faq__media"><img class="ck-faq__image" src="assets/ck-faq-image.png" alt="" width="939" height="729" loading="lazy"></div>
+    </div>
+  </div><dialog class="ck-faq__dialog" data-dialog>
+      <div class="ck-faq__dialog-inner">
+        <button class="ck-faq__dialog-close" type="button" data-dialog-close aria-label="Close"><svg class="ck-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+        <h3 class="ck-faq__dialog-title">Ask a question</h3>
+
+        <form onsubmit="return false">
+          <label class="ck-faq__label" for="ck-faq-name-ck_faq">Name</label>
+          <input class="ck-faq__input" id="ck-faq-name-ck_faq" type="text" name="contact[name]" autocomplete="name" required>
+
+          <label class="ck-faq__label" for="ck-faq-email-ck_faq">Email</label>
+          <input class="ck-faq__input" id="ck-faq-email-ck_faq" type="email" name="contact[email]" autocomplete="email" required>
+
+          <label class="ck-faq__label" for="ck-faq-phone-ck_faq">Phone</label>
+          <input class="ck-faq__input" id="ck-faq-phone-ck_faq" type="tel" name="contact[phone]" autocomplete="tel">
+
+          <label class="ck-faq__label" for="ck-faq-body-ck_faq">Message</label>
+          <textarea class="ck-faq__input ck-faq__textarea" id="ck-faq-body-ck_faq" name="contact[body]" rows="4" required></textarea>
+
+          <button class="ck-faq__cta-button" type="submit">
+            <span class="ck-faq__cta-label">Send</span>
+          </button></form>
+      </div>
+    </dialog></div>
+
+
+
+
+
+</div><div id="shopify-section-ck_footer" class="shopify-section"><div
+  class="ck-foot color-scheme-1"
+  data-ck-root
+  style="
+    --ck-pad-top: 30px;
+    --ck-pad-bottom: 30px;
+    --ck-pad-mobile: 32px;
+    --ck-max: 1260px;
+    --ck-gap: 40px;
+    --ck-item-gap: 24px;
+    --ck-cols: 4;
+    --ck-cols-tablet: 2;
+    --ck-cols-mobile: 1;
+    --ck-align: left;
+    --ck-radius: 0px;
+    --ck-logo-width: 70px;
+    --ck-social-size: 18px;
+    --ck-bg: #3b2a20;
+    --ck-ink: #ffffff;
+    --ck-body: #ffffff;
+    --ck-hover: #f28934;
+    --ck-border: #5a4437;
+    --ck-title-size: 20px;
+    --ck-title-weight: 800;
+    --ck-link-size: 16px;
+    --ck-link-weight: 600;
+    --ck-address-size: 16px;
+    --ck-legal-size: 14px;
+    --ck-lh: 1.5;
+    --ck-link-lh: 2;
+    --ck-speed: 300ms;
+  "
+><div class="ck-foot__bg" style="background-image: url(assets/ck-footer-bg.png);"></div>
+
+  <div class="ck-foot__inner">
+    <div class="ck-foot__grid">
+      <div class="ck-foot__brand"><img class="ck-foot__logo" src="assets/ck-footer-logo.png" alt="" width="70" height="86" loading="lazy"><div class="ck-foot__address"><p>Pet Pad Store<br/>hello@petpads.net</p></div><ul class="ck-foot__socials"><li class="ck-foot__social" >
+                  <a class="ck-foot__social-link" href="" aria-label="X"><svg class="ck-icon" width="18" height="18" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a>
+                </li><li class="ck-foot__social" >
+                  <a class="ck-foot__social-link" href="" aria-label="Facebook"><svg class="ck-icon" width="18" height="18" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M 19.253906 2 C 15.311906 2 13 4.0821719 13 8.8261719 L 13 13 L 8 13 L 8 18 L 13 18 L 13 30 L 18 30 L 18 18 L 22 18 L 23 13 L 18 13 L 18 9.671875 C 18 7.884875 18.582766 7 20.259766 7 L 23 7 L 23 2.2050781 C 22.526 2.1410781 21.144906 2 19.253906 2 z"/></svg></a>
+                </li><li class="ck-foot__social" >
+                  <a class="ck-foot__social-link" href="" aria-label="Instagram"><svg class="ck-icon" width="18" height="18" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M62.9,19.2c-0.1-3.2-0.7-5.5-1.4-7.6S59.7,7.8,58,6.1s-3.4-2.7-5.4-3.5c-2-0.8-4.2-1.3-7.6-1.4C41.5,1,40.5,1,32,1s-9.4,0-12.8,0.1s-5.5,0.7-7.6,1.4S7.8,4.4,6.1,6.1s-2.8,3.4-3.5,5.5c-0.8,2-1.3,4.2-1.4,7.6S1,23.5,1,32s0,9.4,0.1,12.8c0.1,3.4,0.7,5.5,1.4,7.6c0.7,2.1,1.8,3.8,3.5,5.5s3.5,2.8,5.5,3.5c2,0.7,4.2,1.3,7.6,1.4C22.5,63,23.4,63,31.9,63s9.4,0,12.8-0.1s5.5-0.7,7.6-1.4c2.1-0.7,3.8-1.8,5.5-3.5s2.8-3.5,3.5-5.5c0.7-2,1.3-4.2,1.4-7.6c0.1-3.2,0.1-4.2,0.1-12.7S63,22.6,62.9,19.2z M57.3,44.5c-0.1,3-0.7,4.6-1.1,5.8c-0.6,1.4-1.3,2.5-2.4,3.5c-1.1,1.1-2.1,1.7-3.5,2.4c-1.1,0.4-2.7,1-5.8,1.1c-3.2,0-4.2,0-12.4,0s-9.3,0-12.5-0.1c-3-0.1-4.6-0.7-5.8-1.1c-1.4-0.6-2.5-1.3-3.5-2.4c-1.1-1.1-1.7-2.1-2.4-3.5c-0.4-1.1-1-2.7-1.1-5.8c0-3.1,0-4.1,0-12.4s0-9.3,0.1-12.5c0.1-3,0.7-4.6,1.1-5.8c0.6-1.4,1.3-2.5,2.3-3.5c1.1-1.1,2.1-1.7,3.5-2.3c1.1-0.4,2.7-1,5.8-1.1c3.2-0.1,4.2-0.1,12.5-0.1s9.3,0,12.5,0.1c3,0.1,4.6,0.7,5.8,1.1c1.4,0.6,2.5,1.3,3.5,2.3c1.1,1.1,1.7,2.1,2.4,3.5c0.4,1.1,1,2.7,1.1,5.8c0.1,3.2,0.1,4.2,0.1,12.5S57.4,41.3,57.3,44.5z"/><path d="M32,16.1c-8.9,0-15.9,7.2-15.9,15.9c0,8.9,7.2,15.9,15.9,15.9S48,40.9,48,32S40.9,16.1,32,16.1z M32,42.4c-5.8,0-10.4-4.7-10.4-10.4S26.3,21.6,32,21.6c5.8,0,10.4,4.6,10.4,10.4S37.8,42.4,32,42.4z"/><ellipse cx="48.7" cy="15.4" rx="3.7" ry="3.7"/></svg></a>
+                </li></ul></div><nav class="ck-foot__col"  aria-label="Company">
+            <h2 class="ck-foot__col-title">Company</h2>
+            <ul class="ck-foot__links"></ul>
+          </nav><nav class="ck-foot__col"  aria-label="Shop">
+            <h2 class="ck-foot__col-title">Shop</h2>
+            <ul class="ck-foot__links"></ul>
+          </nav></div>
+
+    <div class="ck-foot__bottom"><img class="ck-foot__payments" src="assets/ck-footer-payments.svg" alt="" width="285" height="30" loading="lazy"><p class="ck-foot__legal">© Pet Pad Store </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</div>
+<script>
+document.addEventListener('shopify:section:load', (event) => {
+  const hero = event.target.querySelector('.ck-hero');
+  if (!hero) return;
+  const style = hero.dataset.animate;
+  if (!style || style === 'none') return;
+  hero.dataset.animate = 'none';
+  requestAnimationFrame(() => {
+    hero.dataset.animate = style;
+  });
+});
+
+document.addEventListener('shopify:section:load', (event) => {
+  const root = event.target.querySelector('.ck-feat');
+  if (!root) return;
+  const style = root.dataset.animate;
+  if (!style || style === 'none') return;
+  root.dataset.animate = 'none';
+  requestAnimationFrame(() => {
+    root.dataset.animate = style;
+  });
+});
+
+class CkGallery extends HTMLElement {
+  connectedCallback() {
+    this.track = this.querySelector('[data-track]');
+    this.slides = Array.from(this.querySelectorAll('[data-slide]'));
+    this.thumbs = Array.from(this.querySelectorAll('[data-thumb]'));
+    if (!this.track) return;
+
+    this.onThumb = (event) => {
+      const button = event.target.closest('[data-thumb]');
+      if (!button) return;
+      this.goTo(Number(button.dataset.thumb));
+    };
+    this.onScroll = () => {
+      if (this.raf) cancelAnimationFrame(this.raf);
+      this.raf = requestAnimationFrame(() => this.sync());
+    };
+    this.addEventListener('click', this.onThumb);
+    this.track.addEventListener('scroll', this.onScroll, { passive: true });
+
+    if (this.dataset.drag === 'true') this.enableDrag();
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this.onThumb);
+    if (this.track) this.track.removeEventListener('scroll', this.onScroll);
+    if (this.dragHandlers) {
+      this.track.removeEventListener('pointerdown', this.dragHandlers.down);
+      window.removeEventListener('pointermove', this.dragHandlers.move);
+      window.removeEventListener('pointerup', this.dragHandlers.up);
+    }
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+
+  enableDrag() {
+    let startX = 0;
+    let startLeft = 0;
+    let dragging = false;
+
+    const down = (event) => {
+      dragging = true;
+      startX = event.clientX;
+      startLeft = this.track.scrollLeft;
+      this.track.style.scrollBehavior = 'auto';
+    };
+    const move = (event) => {
+      if (!dragging) return;
+      this.track.scrollLeft = startLeft - (event.clientX - startX);
+    };
+    const up = () => {
+      if (!dragging) return;
+      dragging = false;
+      this.track.style.scrollBehavior = '';
+    };
+
+    this.dragHandlers = { down, move, up };
+    this.track.addEventListener('pointerdown', down);
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+
+  goTo(index) {
+    let target = index;
+    if (this.dataset.loop === 'true') {
+      const count = this.slides.length;
+      target = ((index % count) + count) % count;
+    }
+    const slide = this.slides[target];
+    if (!slide) return;
+    this.track.scrollTo({ left: slide.offsetLeft - this.track.offsetLeft, behavior: 'smooth' });
+    this.mark(target);
+  }
+
+  showMedia(mediaId) {
+    const index = this.slides.findIndex((slide) => slide.dataset.mediaId === String(mediaId));
+    if (index > -1) this.goTo(index);
+  }
+
+  sync() {
+    const index = Math.round(this.track.scrollLeft / Math.max(this.track.clientWidth, 1));
+    this.mark(index);
+  }
+
+  mark(index) {
+    this.thumbs.forEach((thumb, i) => {
+      if (i === index) {
+        thumb.setAttribute('aria-current', 'true');
+      } else {
+        thumb.removeAttribute('aria-current');
+      }
+    });
+  }
+}
+if (!customElements.get('ck-gallery')) customElements.define('ck-gallery', CkGallery);
+
+function ckProductInit(scope) {
+  const root = scope.querySelector('.ck-pdp');
+  if (!root || root.dataset.ckReady === 'true') return;
+  root.dataset.ckReady = 'true';
+
+  const form = root.querySelector('.ck-pdp__form');
+  const qtyInput = root.querySelector('[data-qty-input]');
+
+  root.addEventListener('click', (event) => {
+    const step = event.target.closest('[data-qty-step]');
+    if (step && qtyInput) {
+      const next = Math.max(1, Number(qtyInput.value || 1) + Number(step.dataset.qtyStep));
+      qtyInput.value = next;
+      qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  });
+
+  const dataTag = root.querySelector('[data-variant-data]');
+  if (!dataTag || !form) return;
+
+  let variants = [];
+  try {
+    variants = JSON.parse(dataTag.textContent);
+  } catch (error) {
+    return;
+  }
+
+  const idField = root.querySelector('[data-variant-id]');
+  const priceEl = root.querySelector('[data-price]');
+  const compareEl = root.querySelector('[data-compare]');
+  const submit = root.querySelector('[data-submit]');
+  const submitText = root.querySelector('[data-submit-text]');
+  const soldOut = root.dataset.soldOutLabel;
+  const addLabel = root.dataset.addLabel;
+  const gallery = root.querySelector('ck-gallery');
+
+  const selection = () =>
+    Array.from(root.querySelectorAll('[data-values]')).map((list) => {
+      const active = list.querySelector('[aria-pressed="true"]');
+      return active ? active.dataset.value : null;
+    });
+
+  const format = (cents) => {
+    if (typeof cents !== 'number') return '';
+    const currency = root.dataset.currency || 'USD';
+    try {
+      return new Intl.NumberFormat(document.documentElement.lang || 'en', {
+        style: 'currency',
+        currency,
+      }).format(cents / 100);
+    } catch (error) {
+      return (cents / 100).toFixed(2);
+    }
+  };
+
+  const apply = () => {
+    const chosen = selection();
+    const match = variants.find((variant) =>
+      chosen.every((value, index) => value === null || variant.options[index] === value)
+    );
+    if (!match) return;
+
+    if (idField) idField.value = match.id;
+    if (priceEl) priceEl.textContent = format(match.price);
+    if (compareEl) {
+      const onSale = match.compare_at_price && match.compare_at_price > match.price;
+      compareEl.textContent = onSale ? format(match.compare_at_price) : '';
+      compareEl.hidden = !onSale;
+    }
+    if (submit) submit.disabled = !match.available;
+    if (submitText && soldOut && addLabel) {
+      submitText.textContent = match.available ? addLabel : soldOut;
+    }
+    if (gallery && match.featured_media) gallery.showMedia(match.featured_media.id);
+  };
+
+  root.addEventListener('click', (event) => {
+    const button = event.target.closest('.ck-pdp__value');
+    if (!button) return;
+    const list = button.closest('[data-values]');
+    list.querySelectorAll('.ck-pdp__value').forEach((other) => other.setAttribute('aria-pressed', 'false'));
+    button.setAttribute('aria-pressed', 'true');
+    apply();
+  });
+}
+
+ckProductInit(document);
+document.addEventListener('shopify:section:load', (event) => ckProductInit(event.target));
+document.addEventListener('shopify:section:unload', (event) => {
+  const root = event.target.querySelector('.ck-pdp');
+  if (root) root.dataset.ckReady = 'false';
+});
+
+document.addEventListener('shopify:section:load', (event) => {
+  const root = event.target.querySelector('.ck-note');
+  if (!root) return;
+  const style = root.dataset.animate;
+  if (!style || style === 'none') return;
+  root.dataset.animate = 'none';
+  requestAnimationFrame(() => {
+    root.dataset.animate = style;
+  });
+});
+
+document.addEventListener('shopify:section:load', (event) => {
+  const root = event.target.querySelector('.ck-cards');
+  if (!root) return;
+  const style = root.dataset.animate;
+  if (!style || style === 'none') return;
+  root.dataset.animate = 'none';
+  requestAnimationFrame(() => {
+    root.dataset.animate = style;
+  });
+});
+
+class CkCounters extends HTMLElement {
+  connectedCallback() {
+    this.numbers = Array.from(this.querySelectorAll('[data-count]'));
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (this.dataset.enabled !== 'true' || reduced || !('IntersectionObserver' in window)) {
+      this.finish();
+      return;
+    }
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          this.run();
+          this.observer.disconnect();
+        });
+      },
+      { threshold: Math.min(Math.max(Number(this.dataset.threshold || 20) / 100, 0), 1) }
+    );
+    this.observer.observe(this);
+  }
+
+  disconnectedCallback() {
+    if (this.observer) this.observer.disconnect();
+    if (this.frame) cancelAnimationFrame(this.frame);
+  }
+
+  format(value) {
+    const delimiter = this.dataset.delimiter || '';
+    if (!delimiter) return String(value);
+    return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, delimiter);
+  }
+
+  finish() {
+    this.numbers.forEach((node) => {
+      node.textContent = this.format(Number(node.dataset.to || 0));
+    });
+  }
+
+  run() {
+    const duration = Number(this.dataset.duration || 2000);
+    const step = Math.max(Number(this.dataset.step || 1), 1);
+    const started = performance.now();
+
+    const tick = (now) => {
+      const progress = Math.min((now - started) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      this.numbers.forEach((node) => {
+        const from = Number(node.dataset.from || 0);
+        const to = Number(node.dataset.to || 0);
+        const raw = from + (to - from) * eased;
+        const value = progress === 1 ? to : Math.round(raw / step) * step;
+        node.textContent = this.format(value);
+      });
+
+      if (progress < 1) this.frame = requestAnimationFrame(tick);
+    };
+
+    this.frame = requestAnimationFrame(tick);
+  }
+}
+if (!customElements.get('ck-counters')) customElements.define('ck-counters', CkCounters);
+
+document.addEventListener('shopify:section:load', (event) => {
+  const node = event.target.querySelector('ck-counters');
+  if (node && node.isConnected) node.connectedCallback();
+});
+document.addEventListener('shopify:section:unload', (event) => {
+  const node = event.target.querySelector('ck-counters');
+  if (node) node.disconnectedCallback();
+});
+
+document.addEventListener('shopify:section:load', (event) => {
+  const root = event.target.querySelector('.ck-news');
+  if (!root) return;
+  const style = root.dataset.animate;
+  if (!style || style === 'none') return;
+  root.dataset.animate = 'none';
+  requestAnimationFrame(() => {
+    root.dataset.animate = style;
+  });
+});
+
+class CkAccordion extends HTMLElement {
+  connectedCallback() {
+    this.items = Array.from(this.querySelectorAll('details'));
+    this.onToggle = (event) => {
+      const item = event.target;
+      if (!item.open) return;
+      if (this.dataset.single !== 'true') return;
+      this.items.forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+    };
+    this.items.forEach((item) => item.addEventListener('toggle', this.onToggle));
+  }
+
+  disconnectedCallback() {
+    if (this.items) this.items.forEach((item) => item.removeEventListener('toggle', this.onToggle));
+  }
+}
+if (!customElements.get('ck-accordion')) customElements.define('ck-accordion', CkAccordion);
+
+function ckFaqDialog(scope) {
+  const root = scope.querySelector('.ck-faq');
+  if (!root || root.dataset.ckDialogReady === 'true') return;
+  const dialog = root.querySelector('[data-dialog]');
+  if (!dialog) return;
+  root.dataset.ckDialogReady = 'true';
+
+  root.addEventListener('click', (event) => {
+    if (event.target.closest('[data-dialog-open]')) {
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+    }
+    if (event.target.closest('[data-dialog-close]')) dialog.close();
+  });
+
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+}
+
+ckFaqDialog(document);
+document.addEventListener('shopify:section:load', (event) => ckFaqDialog(event.target));
+document.addEventListener('shopify:section:unload', (event) => {
+  const root = event.target.querySelector('.ck-faq');
+  if (root) root.dataset.ckDialogReady = 'false';
+});
+
+document.addEventListener('shopify:section:load', (event) => {
+  const root = event.target.querySelector('.ck-foot');
+  if (root) root.dataset.ckReady = 'true';
+});
+document.addEventListener('shopify:section:unload', (event) => {
+  const root = event.target.querySelector('.ck-foot');
+  if (root) root.dataset.ckReady = 'false';
+});
+</script>
+</body></html>
